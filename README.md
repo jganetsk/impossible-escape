@@ -64,8 +64,20 @@ GuessMagicSquare(square_to_guess);
 
 ## The Group-Theoretic Explanation
 
+### Sets
+
 We are interested in understanding 2 sets:
 
-- <img src="https://render.githubusercontent.com/render/math?math=C"> the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
-- $$C$$ the set of all possible chessboard states. Note $$|C|=2^{64}$$
-- $$S$$ the set of all squares. Note $$|S|=64$$
+- <img src="https://render.githubusercontent.com/render/math?math=C">, the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
+- <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
+
+We would like to define a function that the prisoners can use to encode a square with the chessboard state:
+
+$$ f : C \rightarrow S $$
+
+The name of the game is to convey a secret <img src="https://render.githubusercontent.com/render/math?math=s \in S">. Given some initial chessboard state <img src="https://render.githubusercontent.com/render/math?math=c_{0}">, prisoner #1 will want to change the
+chessboard state to <img src="https://render.githubusercontent.com/render/math?math=c_{1}"> such that <img src="https://render.githubusercontent.com/render/math?math=f(c_{1}) = s">.
+
+### Groups
+
+Since we want to understand how the function <img src="https://render.githubusercontent.com/render/math?math=f"> behaves with respect to changes in its input, we will need more algebraic structure.
