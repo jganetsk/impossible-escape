@@ -86,9 +86,15 @@ $$f : C \rightarrow S$$
 ### Groups
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
-and $S$ groups. A group is a set with an associative binary operator, $+$. One element in the group must be the identity, and each element must have an inverse in the group.
+and $S$ groups.
+- A group is the tuple $(S, 0, +)$.
+- In other words, it is a set with an associative binary operator $+$
+- and an identity element $0$ such that $\forall s \in S. s + 0 = s$
+- Also, each element $s$ has an inverse element such that $s + s^{-1} = 0$
 
-In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. The set of chessboard states is isomorphic to the set of chessboard state deltas. We can make $C$ the 64-dimensional vector space over the field $\{0, 1\}$. This is isomorphic to the group of 64-bit bitvectors with XOR as the $+$ operator, which may be a more intuitive representation for computer programmers.
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. The set of chessboard states is isomorphic to the set of chessboard state deltas. We can just decide that the $0$ element of the group corresponds to the board with all coins tails-side up, and now each element of the group can be alternately interpreted as either a chessboard state or a chessboard state delta.
+
+We can make $C$ the 64-dimensional vector space over the field $\{0, 1\}$. This is isomorphic to the group of 64-bit bitvectors with XOR as the $+$ operator, which may be a more intuitive representation for computer programmers.
 
 - Note that the group $C$ has a basis number of $64$. Note also that the standard basis, $B \subset C$ is equivalent to the set of valid moves that prisoner #1 can make.
 - We will now make $f$ a group homomorphism
