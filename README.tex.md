@@ -68,6 +68,8 @@ GuessMagicSquare(square_to_guess);
 
 We are interested in understanding 2 sets:
 
+Is this inline?? $C$
+
 - $$C$$, the set of all possible chessboard states. Note $$|C|=2^{64}$$
 - <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
 
