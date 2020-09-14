@@ -75,12 +75,13 @@ We would like to define a function that the prisoners can use to encode a square
 
 $$f : C \rightarrow S$$
 
-The name of the game is to convey a secret $s \in S$. Given some initial chessboard state $c_{0} \in C$, prisoner #1 will want to change the
-chessboard state to $c_{1} \in C$ such that $f(c_{1}) = s$
+- The name of the game is to convey a secret $s \in S$.
+- Given some initial chessboard state $c_{0} \in C$
+- Prisoner #1 will want to change the chessboard state to $c_{1} \in C$ such that $f(c_{1}) = s$
 
 ### Groups
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups. A group is a set with an associative binary operator, $+$. One element in the group must be the identity, and each element must have an inverse in the group.
 
-We can make $C$ a group by making it a 64-dimensional vector space over the field ${{0,1}}$
+We can make $C$ a group by making it a 64-dimensional vector space over the field $\{0,1\}$
