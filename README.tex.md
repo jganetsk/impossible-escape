@@ -68,15 +68,7 @@ GuessMagicSquare(square_to_guess);
 
 We are interested in understanding 2 sets:
 
-$$C$$
-
-Test:
-
-$$S$$
-
-$S$
-
-- <img src="https://render.githubusercontent.com/render/math?math=C">, the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
+- $$C$$, the set of all possible chessboard states. Note $$|C|=2^{64}$$
 - <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
 
 We would like to define a function that the prisoners can use to encode a square with the chessboard state:
