@@ -68,15 +68,7 @@ GuessMagicSquare(square_to_guess);
 
 We are interested in understanding 2 sets:
 
-<p align="center"><img src="/tex/e242d5dd2ef4ef762db8b72b38a17315.svg?invert_in_darkmode&sanitize=true" align=middle width=12.924643049999998pt height=11.232861749999998pt/></p>
-
-Test:
-
-<p align="center"><img src="/tex/ed81a336c10dacd23655dc6247c58664.svg?invert_in_darkmode&sanitize=true" align=middle width=11.0274021pt height=11.232861749999998pt/></p>
-
-<img src="/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/>
-
-- <img src="https://render.githubusercontent.com/render/math?math=C">, the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
+- <p align="center"><img src="/tex/e242d5dd2ef4ef762db8b72b38a17315.svg?invert_in_darkmode&sanitize=true" align=middle width=12.924643049999998pt height=11.232861749999998pt/></p>, the set of all possible chessboard states. Note <p align="center"><img src="/tex/2e531d27250c776d8d4b1279fdda6461.svg?invert_in_darkmode&sanitize=true" align=middle width=65.29901895pt height=18.312383099999998pt/></p>
 - <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
 
 We would like to define a function that the prisoners can use to encode a square with the chessboard state:
