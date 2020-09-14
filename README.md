@@ -66,5 +66,6 @@ GuessMagicSquare(square_to_guess);
 
 We are interested in understanding 2 sets:
 
+- <img src="https://render.githubusercontent.com/render/math?math=C"> the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
 - $$C$$ the set of all possible chessboard states. Note $$|C|=2^{64}$$
 - $$S$$ the set of all squares. Note $$|S|=64$$
