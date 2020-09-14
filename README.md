@@ -68,21 +68,19 @@ GuessMagicSquare(square_to_guess);
 
 We are interested in understanding 2 sets:
 
-Is this inline?? <img src="/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/>
-
-- <p align="center"><img src="/tex/e242d5dd2ef4ef762db8b72b38a17315.svg?invert_in_darkmode&sanitize=true" align=middle width=12.924643049999998pt height=11.232861749999998pt/></p>, the set of all possible chessboard states. Note <p align="center"><img src="/tex/2e531d27250c776d8d4b1279fdda6461.svg?invert_in_darkmode&sanitize=true" align=middle width=65.29901895pt height=18.312383099999998pt/></p>
-- <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
+- <img src="/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/>, the set of all possible chessboard states. Note <img src="/tex/e9c240a6f50a76c838e20dccd38baa35.svg?invert_in_darkmode&sanitize=true" align=middle width=65.29901894999999pt height=26.76175259999998pt/>
+- <img src="/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/>, the set of all squares. Note <img src="/tex/727d3c9e2b77bcd0cb11822adb5a15af.svg?invert_in_darkmode&sanitize=true" align=middle width=58.51588049999999pt height=24.65753399999998pt/>
 
 We would like to define a function that the prisoners can use to encode a square with the chessboard state:
 
-<img src="https://render.githubusercontent.com/render/math?math=f : C \rightarrow S">
+<p align="center"><img src="/tex/6beef70c90af8c131a8bc1d8e304254b.svg?invert_in_darkmode&sanitize=true" align=middle width=73.03847264999999pt height=14.611878599999999pt/></p>
 
-The name of the game is to convey a secret <img src="https://render.githubusercontent.com/render/math?math=s \in S">. Given some initial chessboard state <img src="https://render.githubusercontent.com/render/math?math=c_{0} \in C">, prisoner #1 will want to change the
-chessboard state to <img src="https://render.githubusercontent.com/render/math?math=c_{1} \in C"> such that <img src="https://render.githubusercontent.com/render/math?math=f(c_{1}) = s">.
+The name of the game is to convey a secret <img src="/tex/2d8cca33f0ee74986943da285a93a659.svg?invert_in_darkmode&sanitize=true" align=middle width=38.82401819999999pt height=22.465723500000017pt/>. Given some initial chessboard state <img src="/tex/87a45f06900f2b8979d64cee76c9d52a.svg?invert_in_darkmode&sanitize=true" align=middle width=47.504046149999986pt height=22.465723500000017pt/>, prisoner #1 will want to change the
+chessboard state to <img src="/tex/4ff28fe9f85fb1920ff4608be08af94d.svg?invert_in_darkmode&sanitize=true" align=middle width=47.504046149999986pt height=22.465723500000017pt/> such that <img src="/tex/7e0b0f84da75b2556c33a223c49083e0.svg?invert_in_darkmode&sanitize=true" align=middle width=66.71422064999999pt height=24.65753399999998pt/>
 
 ### Groups
 
-Since we want to understand how the function <img src="https://render.githubusercontent.com/render/math?math=f"> behaves with respect to changes in its input, we will need more algebraic structure. We need to make <img src="https://render.githubusercontent.com/render/math?math=C"> 
-and <img src="https://render.githubusercontent.com/render/math?math=S"> groups. A group is a set with an associative binary operator, <img src="https://render.githubusercontent.com/render/math?math=+">. One element in the group must be the identity, and each element must have an inverse in the group.
+Since we want to understand how the function <img src="/tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode&sanitize=true" align=middle width=9.81741584999999pt height=22.831056599999986pt/> behaves with respect to changes in its input, we will need more algebraic structure. We need to make <img src="/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/>
+and <img src="/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> groups. A group is a set with an associative binary operator, <img src="/tex/df33724455416439909c33a7db76b2bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.785434199999989pt height=19.1781018pt/>. One element in the group must be the identity, and each element must have an inverse in the group.
 
-We can make <img src="https://render.githubusercontent.com/render/math?math=C"> a group by making it a 64-dimensional vector space over the field <img src="https://render.githubusercontent.com/render/math?math=\{0,1\}">
+We can make <img src="/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/> a group by making it a 64-dimensional vector space over the field <img src="/tex/e3d7babdf84d997af0eefde61fc68c05.svg?invert_in_darkmode&sanitize=true" align=middle width=23.744301899999993pt height=21.18721440000001pt/>
