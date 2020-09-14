@@ -70,6 +70,12 @@ We are interested in understanding 2 sets:
 
 $$C$$
 
+Test:
+
+$$S$$
+
+$S$
+
 - <img src="https://render.githubusercontent.com/render/math?math=C">, the set of all possible chessboard states. Note <img src="https://render.githubusercontent.com/render/math?math=|C|=2^{64}">
 - <img src="https://render.githubusercontent.com/render/math?math=S">, the set of all squares. Note <img src="https://render.githubusercontent.com/render/math?math=|S|=64">
 
