@@ -75,9 +75,12 @@ We would like to define a function that the prisoners can use to encode a square
 
 <img src="https://render.githubusercontent.com/render/math?math=f : C \rightarrow S">
 
-The name of the game is to convey a secret <img src="https://render.githubusercontent.com/render/math?math=s \in S">. Given some initial chessboard state <img src="https://render.githubusercontent.com/render/math?math=c_{0}">, prisoner #1 will want to change the
-chessboard state to <img src="https://render.githubusercontent.com/render/math?math=c_{1}"> such that <img src="https://render.githubusercontent.com/render/math?math=f(c_{1}) = s">.
+The name of the game is to convey a secret <img src="https://render.githubusercontent.com/render/math?math=s \in S">. Given some initial chessboard state <img src="https://render.githubusercontent.com/render/math?math=c_{0} \in C">, prisoner #1 will want to change the
+chessboard state to <img src="https://render.githubusercontent.com/render/math?math=c_{1} \in C"> such that <img src="https://render.githubusercontent.com/render/math?math=f(c_{1}) = s">.
 
 ### Groups
 
-Since we want to understand how the function <img src="https://render.githubusercontent.com/render/math?math=f"> behaves with respect to changes in its input, we will need more algebraic structure.
+Since we want to understand how the function <img src="https://render.githubusercontent.com/render/math?math=f"> behaves with respect to changes in its input, we will need more algebraic structure. We need to make <img src="https://render.githubusercontent.com/render/math?math=C"> 
+and <img src="https://render.githubusercontent.com/render/math?math=S"> groups. A group is a set with an associative binary operator, <img src="https://render.githubusercontent.com/render/math?math=+">. One element in the group must be the identity, and each element must have an inverse in the group.
+
+We can make <img src="https://render.githubusercontent.com/render/math?math=C"> a group by making it a 64-dimensional vector space over the field <img src="https://render.githubusercontent.com/render/math?math=\{0,1\}">
