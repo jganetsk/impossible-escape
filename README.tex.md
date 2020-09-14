@@ -64,6 +64,10 @@ GuessMagicSquare(square_to_guess);
 
 ## The Group-Theoretic Explanation
 
+### Heads vs Tails
+
+From now on, we will encode tails as $0$ and heads as $1$. We will commonly refer to the field $\{0, 1\}$.
+
 ### Sets
 
 We are interested in understanding 2 sets:
@@ -77,11 +81,16 @@ $$f : C \rightarrow S$$
 
 - The name of the game is to convey a secret $s \in S$.
 - Given some initial chessboard state $c_{0} \in C$
-- Prisoner #1 will want to change the chessboard state to $c_{1} \in C$ such that $f(c_{1}) = s$
+- Prisoner #1 will want to change the chessboard state from $c_{0}$ to $c_{1} \in C$ such that $f(c_{1}) = s$
 
 ### Groups
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups. A group is a set with an associative binary operator, $+$. One element in the group must be the identity, and each element must have an inverse in the group.
 
-We can make $C$ a group by making it a 64-dimensional vector space over the field $\{0,1\}$
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. The set of chessboard states is isomorphic to the set of chessboard state deltas. We can make $C$ the 64-dimensional vector space over the field $\{0, 1\}$. This is isomorphic to the group of 64-bit bitvectors with XOR as the $+$ operator, which may be a more intuitive representation for computer programmers.
+
+- Note that the group $C$ has a basis number of $64$. Note also that the standard basis, $B \subset C$ is equivalent to the set of valid moves that prisoner #1 can make.
+- We will now make $f$ a group homomorphism
+- $\Delta c \in B$ is the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
+
