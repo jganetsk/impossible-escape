@@ -83,4 +83,4 @@ chessboard state to $c_{1} \in C$ such that $f(c_{1}) = s$
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups. A group is a set with an associative binary operator, $+$. One element in the group must be the identity, and each element must have an inverse in the group.
 
-We can make $C$ a group by making it a 64-dimensional vector space over the field ${0,1}$
+We can make $C$ a group by making it a 64-dimensional vector space over the field ${{0,1}}$
