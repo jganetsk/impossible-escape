@@ -145,7 +145,7 @@ There are two main questions that remain:
 
 And the answers:
 
-1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
+1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
@@ -154,7 +154,7 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64 $\mathbb{Z}/64\mathbb{Z}$. This seems promising at first but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
 
-The theoretical reason for this there are no valid homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}, so we cannot construct $f$.
+The theoretical reason for this there are no valid homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we cannot construct $f$.
 
 The main insight is in realizing that in $\forall c \in C: c + c = 0$. In other words, x XOR x is always zero. If we apply $f$, then $$\forall c \in C: f(c) + f(c) = 0$$ or in other words $$\forall s \in S: s + s = 0$$ or $$\forall s \in S: s = -s$$ 
 
