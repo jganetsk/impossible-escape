@@ -167,7 +167,7 @@ The theoretical reason for this there are no valid nontrivial homomorphisms from
 
 The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we realize that $S$ must also be self-inverting, or $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
 
-$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, $f$ would require that $-2 = 2$, but in this group $-2 = 62$. 
+$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in this group $-2 = 62$. 
 
 Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
 
