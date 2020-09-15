@@ -1,9 +1,3 @@
-$\usepackage{amsmath}
-
-\newcommand{\irow}[1]{% inline row vector
-  \begin{smallmatrix}(#1)\end{smallmatrix}%
-}$
-
 # The Solution to the "Impossible Escape"
 
 ## The Puzzle
@@ -104,7 +98,14 @@ and $S$ groups, and make $f$ a group homomorphism.
 #### Additional Definitions
 - A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is of the form $\irow{1&0&0&\dots&0}$.
+- A standard basis is a basis for a vector space where each element is of the form $
+\usepackage{amsmath}
+
+\newcommand{\irow}[1]{% inline row vector
+  \begin{smallmatrix}(#1)\end{smallmatrix}%
+}
+
+\irow{1&0&0&\dots&0}$.
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
 
