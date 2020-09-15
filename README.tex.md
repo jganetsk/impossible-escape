@@ -80,8 +80,9 @@ We would like to define a function that the prisoners can use to encode a square
 $$f : C \rightarrow S$$
 
 - Our objective is to convey a secret $s \in S$.
-- Given some initial chessboard state $c_{0} \in C$
+- Given some initial chessboard state $c_{0} \in C$ chosen by the jailer
 - Prisoner #1 will want to change the chessboard state from $c_{0}$ to $c_{1} \in C$ by toggling a single coin such that $f(c_{1}) = s$
+- Prisoner #2 will observe the chessboard state $c_{1}$ and compute $f(c_{1})$, using that to guess $s$
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups, and make $f$ a group homomorphism.
@@ -98,17 +99,28 @@ and $S$ groups, and make $f$ a group homomorphism.
 #### Additional Definitions
 - A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 b\end{smallmatrix}\right)$
+- A standard basis is a basis for a vector space where each element is of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
 
 ### Applying Group Theory to the Problem
 
-In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. A set of chessboard states is isomorphic to a set of chessboard state deltas. 
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identify element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 is choosing to make a move from a set of 64 chessboard state deltas.
 
-Concretely, We will make $C$ the 64-dimensional vector space over the field $\{0, 1\}$. This is isomorphic to the group of 64-bit bitvectors, using XOR as the $+$ operator. This may be a more intuitive representation for computer programmers.
+We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors, using XOR as the $+$ operator. 
 
-- Note that the group $C$ has a basis number of $64$. Note also that the standard basis, $B \subset C$ is equivalent to the set of valid moves that prisoner #1 can make.
-- We will now make $f$ a group homomorphism
+- Note that the standard basis of the vector space $B \subset C$ the set of valid moves that prisoner #1 can make.
 - $\Delta c \in B$ is the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
+- $f$ is a group homomorphism from $f : C \rightarrow S$
+- We know that $S$ is a set with 64 elements, but we have not yet decided how to make it into a group. That will come later.
+
+Let's now solve for $\Delta c$, the move prisoner #1 should make:
+
+$$f(c_{1}) = s$$
+
+$$f(c_{0} + \Delta c) = s$$
+
+$$f(c_{0}) + f(\Delta c) = s$$
+
+$$f(\Delta c) = s - f(c_{0})$$
 
