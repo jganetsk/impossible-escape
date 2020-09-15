@@ -165,11 +165,11 @@ The first intuition many seem to have when trying to solve this problem is to ma
 
 The theoretical reason for this there are no valid nontrivial homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we would not be able to construct $f$.
 
-The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we realize that $S$ must also be *self-inverting*, or $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
+The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we realize that $S$ must also be self-inverting, or $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
 
-$\mathbb{Z}/64\mathbb{Z}$ does not have this property. For example, $f$ would require that $-2 = 2$, but in this group $-2 = 62$. 
+$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, $f$ would require that $-2 = 2$, but in this group $-2 = 62$. 
 
-Which group has 64 elements and has this property? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
+Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
 
 Recall that $$\Delta c \in f^{-1}[s - f(c_{0})]$$ Using the fact that $-s = s$ we can simplify this to $$\Delta c \in f^{-1}[s + f(c_{0})]$$
 
