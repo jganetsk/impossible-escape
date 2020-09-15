@@ -165,7 +165,7 @@ The first intuition many seem to have when trying to solve this problem is to ma
 
 The theoretical reason for this there are no valid nontrivial homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we would not be able to construct $f$.
 
-The main insight is in realizing that in $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
+The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we realize that $S$ must also be *self-inverting*, or $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
 
 $\mathbb{Z}/64\mathbb{Z}$ does not have this property. For example, $f$ would require that $-2 = 2$, but in this group $-2 = 62$. 
 
