@@ -102,6 +102,7 @@ and $S$ groups, and make $f$ a group homomorphism.
 - A standard basis is a basis for a vector space where each element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
+- The preimage or inverse image of a set $S$ under $f$ is $f^{-1}$ such that $f^{-1}\[S\] = \{c \in C \mid f(c) \in S\}$
 
 ### Applying Group Theory to the Problem
 
@@ -124,10 +125,8 @@ $$f(c_{0}) + f(\Delta c) = s$$
 
 $$f(\Delta c) = s - f(c_{0})$$
 
-Now we must introduce an inverse function to $f$ which will provide us a set of possible moves to make with the desired impact:
+We will now introduce the usage of the inverse image, $f^{-1}$
 
-$$f^{-1} : S \rightarrow 2^{C}$$
+$$f^{-1}\[f(\Delta c\)] = f^{-1}\[s - f(c_{0})\]$$
 
-$$f^{-1}(s) = \{c \in C \mid f(c) = s}$$
-
-$$\forall \Delta c \in C: \Delta c \in f^{-1}(f(\delta C))$$
+$$\Delta c \in f^{-1}\[s - f(c_{0})\]$$
