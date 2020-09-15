@@ -1,3 +1,9 @@
+$\usepackage{amsmath}
+
+\newcommand{\irow}[1]{% inline row vector
+  \begin{smallmatrix}(#1)\end{smallmatrix}%
+}$
+
 # The Solution to the "Impossible Escape"
 
 ## The Puzzle
@@ -34,7 +40,7 @@ uint16 ComputeXOROfHeads() {
   uint6 xor_of_heads = 0;
   for (uint6 i = 0; i < 64; i++) {
     if (GetCoinState(i) == Heads) {
-      xor_of_heads ^= i;  // This is a bitwise XOR
+      xor_of_heads = xor_of_heads ^ i;  // This is a bitwise XOR
     }
   }
 }
@@ -46,9 +52,9 @@ uint16 ComputeXOROfHeads() {
 ```cpp
 
 void ToggleCoin(uint6 square_index);
-uint6 GetMagicSquare();
+uint6 GetMagicSquareIndex();
 
-ToggleCoin(ComputeXOROfHeads() ^ GetMagicSquare());
+ToggleCoin(ComputeXOROfHeads() ^ GetMagicSquareIndex());
 ```
 
 #### Prisoner #2
@@ -98,9 +104,11 @@ and $S$ groups, and make $f$ a group homomorphism.
 #### Additional Definitions
 - A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is of the form $[1  0  0  0  \dots  0]$.
-- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a +_{F} b) = f(a) +_{G} f(b)$
+- A standard basis is a basis for a vector space where each element is of the form $\irow{1&0&0&\dots$0}$.
+- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
+
+### Applying Group Theory to the Problem
 
 In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. A set of chessboard states is isomorphic to a set of chessboard state deltas. 
 
