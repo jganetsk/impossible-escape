@@ -99,8 +99,6 @@ and $S$ groups, and make $f$ a group homomorphism.
 - A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
 - A standard basis is a basis for a vector space where each element is of the form $
-\usepackage{amsmath}
-
 \newcommand{\irow}[1]{% inline row vector
   \begin{smallmatrix}(#1)\end{smallmatrix}%
 }
