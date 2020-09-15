@@ -152,10 +152,10 @@ And the answers:
 
 Much of what we've discussed above is mere formalism. Now we get to the core of the problem: choosing a group for $S$.
 
-The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64 $\mathbb{Z}/64\mathbb{Z}$. This seems promising at first but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
+The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
 
-The theoretical reason for this there are no valid homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we cannot construct $f$.
+The theoretical reason for this there are no valid homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we would not be able to construct $f$.
 
-The main insight is in realizing that in $\forall c \in C: c + c = 0$. In other words, x XOR x is always zero. If we apply $f$, then $$\forall c \in C: f(c) + f(c) = 0$$ or in other words $$\forall s \in S: s + s = 0$$ or $$\forall s \in S: s = -s$$ 
+The main insight is in realizing that in $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = 0$$ or $$\forall s \in S: s = -s$$ 
 
-Which group has 64 elements and has this property? The group $\{0, 1\}^{6}$. In other words, $S$ is the group of 6-bit bitvectors under the XOR operator.
+Which group has 64 elements and has this property? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field ${0, 1}$, also known as the group of 6-bit bitvectors under the XOR operator.
