@@ -102,7 +102,8 @@ and $S$ groups, and make $f$ a group homomorphism.
 - A standard basis is a basis for a vector space where each element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
-- The preimage or inverse image of a set $S$ under $f$ is $f^{-1}$ such that $f^{-1}[S] = \{c \in C \mid f(c) \in S\}$
+- The image of a set $C$ under $f$ is $f[C] = \{f(c) \mid c \in C\}
+- The preimage or inverse image of a set $S$ under $f$ is $f^{-1}[S] = \{c \in C \mid f(c) \in S\}$
 
 ### Applying Group Theory to the Problem
 
@@ -110,7 +111,7 @@ In order to make $C$ a group, we need to be able to answer the question *what do
 
 We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors, using XOR as the $+$ operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
-- We choose this group as the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make.
+- Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make.
 - $\Delta c \in B$ is the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - $f$ is a group homomorphism from $f : C \rightarrow S$
 - We know that $S$ is a set with 64 elements, but we have not yet decided how to make it into a group. That will come later.
@@ -132,3 +133,16 @@ $$f^{-1}[f(\Delta c)] = f^{-1}[s - f(c_{0})]$$
 Therefore:
 
 $$\Delta c \in f^{-1}[s - f(c_{0})]$$
+
+The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$. To do this,
+we must guarantee that the image of $f$ under the standard basis $B$ is surjective (onto) on $S$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (any basis of a 64-dimension vector space has 64 elements) and there are 64 elements in $S$ (as it is the set of all squares). This is made even easier by the fact that every standard basis element toggles exactly one square, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets. 
+
+There are two main questions that remain:
+
+1. We have defined the values of $f(b)$ where $b \in B$. We must now define the remaining values of $f(c)$ where $c \in C$.
+1. We must still need to make $S$ into a group. Without this, we cannot compute $s - f(c_{0})$, for we have not defined the $+$ operator yet.
+
+And the answers:
+
+1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements: $b_{i} \in B, c = \displaystyle\sum_{i} b_{i}$. Therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
+1. Hello
