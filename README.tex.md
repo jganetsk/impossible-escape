@@ -84,23 +84,23 @@ $$f : C \rightarrow S$$
 - Prisoner #1 will want to change the chessboard state from $c_{0}$ to $c_{1} \in C$ by toggling a single coin such that $f(c_{1}) = s$
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
-and $S$ groups.
+and $S$ groups, and make $f$ a group homomorphism.
 
 ### Review of Group Theory
 
 #### What is a Group?
 - A group $G$ is the tuple $(S, e, +)$.
 - It is a set $S$ with an associative binary operator $+$
-- The set contains an identity element $e \in S$ such that $\forall s \in S \mid s + e = s$
-- Each element $s \in S$ has an inverse element $-s \in S$ such that $\forall s \in S \mid s + (-s) = e$
+- The set contains an identity element $e \in S$ such that $\forall s \in S : s + e = s$
+- Each element $s \in S$ has an inverse element $-s \in S$ such that $\forall s \in S : s + (-s) = e$
 - The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
 
 #### Additional Definitions
-- A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G \mid g = \displaystyle\sum_{i} b_{i}$
+- A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is of the form $[1 0 0 0 \dots 0]$.
-- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F \mid f(a +_{F} b) = f(a) +_{G} f(b)$
-- As corollaries to the above, for any group homomorphism $f$, $f(e_{F}) = e_{G}$ and $\forall a \in F \mid f(-a) = -f(a)$
+- A standard basis is a basis for a vector space where each element is of the form $[1  0  0  0  \dots  0]$.
+- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a +_{F} b) = f(a) +_{G} f(b)$
+- As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
 
 In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two board states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. A set of chessboard states is isomorphic to a set of chessboard state deltas. 
 
