@@ -109,7 +109,7 @@ and $S$ groups, and make $f$ a group homomorphism.
 
 In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identify element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
 
-We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors, using XOR as the $+$ operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
+We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
 - Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make.
 - $\Delta c \in B$ is the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
@@ -134,8 +134,9 @@ Therefore:
 
 $$\Delta c \in f^{-1}[s - f(c_{0})]$$
 
-The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$. To do this,
-we must guarantee that the image of $f$ under the standard basis $B$ is surjective (onto) on $S$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (any basis of a 64-dimension vector space has 64 elements) and there are 64 elements in $S$ (as it is the set of all squares). This is made even easier by the fact that every standard basis element toggles exactly one square, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets. 
+The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
+
+To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (any basis of a 64-dimension vector space has 64 elements) and there are 64 elements in $S$ (as it is the set of all squares). This is made even easier by the fact that every standard basis element toggles exactly one square, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets. 
 
 There are two main questions that remain:
 
@@ -144,5 +145,17 @@ There are two main questions that remain:
 
 And the answers:
 
-1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements: $b_{i} \in B, c = \displaystyle\sum_{i} b_{i}$. Therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
-1. Hello
+1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
+1. Now comes the interesting part. What do use as a group for $S$?
+
+#### Choosing a group for $S$
+
+Much of what we've discussed above is mere formalism. Now we get to the core of the problem: choosing a group for $S$.
+
+The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64 $\mathbb{Z}/64\mathbb{Z}$. This seems promising at first but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
+
+The theoretical reason for this there are no valid homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}, so we cannot construct $f$.
+
+The main insight is in realizing that in $\forall c \in C: c + c = 0$. In other words, x XOR x is always zero. If we apply $f$, then $$\forall c \in C: f(c) + f(c) = 0$$ or in other words $$\forall s \in S: s + s = 0$$ or $$\forall s \in S: s = -s$$ 
+
+Which group has 64 elements and has this property? The group $\{0, 1\}^{6}$. In other words, $S$ is the group of 6-bit bitvectors under the XOR operator.
