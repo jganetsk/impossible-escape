@@ -102,6 +102,7 @@ and <img src="/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanit
 - A standard basis is a basis for a vector space where each element is a vector of the form <img src="/tex/ab7126e4ad76a713043e3acadc024961.svg?invert_in_darkmode&sanitize=true" align=middle width=76.69167164999999pt height=24.65753399999998pt/>
 - A group homomorphism is a function <img src="/tex/396ebc256c33dd601356a3467916d899.svg?invert_in_darkmode&sanitize=true" align=middle width=74.8650012pt height=22.831056599999986pt/> from group <img src="/tex/b8bc815b5e9d5177af01fd4d3d3c2f10.svg?invert_in_darkmode&sanitize=true" align=middle width=12.85392569999999pt height=22.465723500000017pt/> to group <img src="/tex/5201385589993766eea584cd3aa6fa13.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/> such that <img src="/tex/0ff4d02bb1960f671388dfe24832f757.svg?invert_in_darkmode&sanitize=true" align=middle width=240.22221629999999pt height=24.65753399999998pt/>
 - As corollaries to the above, for any group homomorphism <img src="/tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode&sanitize=true" align=middle width=9.81741584999999pt height=22.831056599999986pt/>, the following are true: <img src="/tex/2c43d9f3a62f8128b9c6bb7789635316.svg?invert_in_darkmode&sanitize=true" align=middle width=80.9913819pt height=24.65753399999998pt/> and <img src="/tex/9cd13c7a6ba13e3cf1c4fa8efca4fd6e.svg?invert_in_darkmode&sanitize=true" align=middle width=174.53758079999997pt height=24.65753399999998pt/>
+- The preimage or inverse image of a set <img src="/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> under <img src="/tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode&sanitize=true" align=middle width=9.81741584999999pt height=22.831056599999986pt/> is <img src="/tex/8fac22af20becca270bc855e487906cb.svg?invert_in_darkmode&sanitize=true" align=middle width=26.643980549999988pt height=26.76175259999998pt/> such that <img src="/tex/d2d20a0e7c0a100fb08694e79172bfbf.svg?invert_in_darkmode&sanitize=true" align=middle width=188.9652171pt height=26.76175259999998pt/>
 
 ### Applying Group Theory to the Problem
 
@@ -124,10 +125,8 @@ Let's now solve for <img src="/tex/da6e5b842edb0a8ada1035cc77dd710f.svg?invert_i
 
 <p align="center"><img src="/tex/319903fe16074cddbd22ceb6c9fef0c6.svg?invert_in_darkmode&sanitize=true" align=middle width=130.22073404999998pt height=16.438356pt/></p>
 
-Now we must introduce an inverse function to <img src="/tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode&sanitize=true" align=middle width=9.81741584999999pt height=22.831056599999986pt/> which will provide us a set of possible moves to make with the desired impact:
+We will now introduce the usage of the inverse image, <img src="/tex/8fac22af20becca270bc855e487906cb.svg?invert_in_darkmode&sanitize=true" align=middle width=26.643980549999988pt height=26.76175259999998pt/>
 
-<p align="center"><img src="/tex/6d855d443bffd7368df4747197b155b1.svg?invert_in_darkmode&sanitize=true" align=middle width=96.2159781pt height=17.8466442pt/></p>
+<p align="center"><img src="/tex/ca9aaa36ef41a66615b4a197fd1d35d8.svg?invert_in_darkmode&sanitize=true" align=middle width=183.3259824pt height=18.312383099999998pt/></p>
 
-<p align="center"><img src="/tex/99ca13c4373a451fcba5f86d0838554b.svg?invert_in_darkmode&sanitize=true" align=middle width=191.26138515pt height=18.312383099999998pt/></p>
-
-<p align="center"><img src="/tex/373038f8a58e08bbce6e88795036aba0.svg?invert_in_darkmode&sanitize=true" align=middle width=201.2695938pt height=18.312383099999998pt/></p>
+<p align="center"><img src="/tex/230420a18b039dc4b4746b3a393a1026.svg?invert_in_darkmode&sanitize=true" align=middle width=133.25726534999998pt height=18.312383099999998pt/></p>
