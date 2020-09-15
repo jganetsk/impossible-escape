@@ -97,19 +97,19 @@ and $S$ groups, and make $f$ a group homomorphism.
 - The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
 
 #### Additional Definitions
-- A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of basis elements. $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
+- A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}$. This means that every element in the group can be expressed as a sum of some set of basis elements: $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$
+- A standard basis is a basis for a vector space where each element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
 
 ### Applying Group Theory to the Problem
 
-In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identify element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 is choosing to make a move from a set of 64 chessboard state deltas.
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identify element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
 
-We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors, using XOR as the $+$ operator. 
+We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors, using XOR as the $+$ operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
-- Note that the standard basis of the vector space $B \subset C$ the set of valid moves that prisoner #1 can make.
+- We choose this group as the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make.
 - $\Delta c \in B$ is the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - $f$ is a group homomorphism from $f : C \rightarrow S$
 - We know that $S$ is a set with 64 elements, but we have not yet decided how to make it into a group. That will come later.
@@ -124,3 +124,10 @@ $$f(c_{0}) + f(\Delta c) = s$$
 
 $$f(\Delta c) = s - f(c_{0})$$
 
+Now we must introduce an inverse function to $f$ which will provide us a set of possible moves to make with the desired impact:
+
+$$f^{-1} : S \rightarrow 2^{C}$$
+
+$$f^{-1}(s) = \{c \in C \mid f(c) = s}$$
+
+$$\forall \Delta c \in C: \Delta c \in f^{-1}(f(\delta C))$$
