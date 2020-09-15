@@ -12,6 +12,15 @@ Enumerate all 64 squares on the board, 0..63. We will work with these values in 
 For example, on a 4x4 board, you might enumerate the squares this way:
 |||||
 |-|-|-|-|
+| 0 | 1 | 2 | 3 |
+| 4 | 5 | 6 | 7 |
+| 8 | 9 | 10 | 11|
+| 12 | 13 | 14 | 15|
+
+Or, in binary:
+
+|||||
+|-|-|-|-|
 | 0000 | 0001 | 0010 | 0011 |
 | 0100 | 0101 | 0110 | 0111 |
 | 1000 | 1001 | 1010 | 1011|
