@@ -161,3 +161,7 @@ The main insight is in realizing that in $\forall c \in C: c + c = e$. In other 
 $\mathbb{Z}/64\mathbb{Z}$ does not have this property. For example, $f$ would require that $-2 = 2$, but in this group $-2 = 62$. 
 
 Which group has 64 elements and has this property? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
+
+Recall that $$\Delta c \in f^{-1}[s - f(c_{0})]$$ Since $-s = s$, we can simplify this to $$\Delta c \in f^{-1}[s + f(c_{0})]$$
+
+
