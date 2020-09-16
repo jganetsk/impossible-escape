@@ -39,13 +39,14 @@ enum CoinState {
 // uint6 is a 6-bit unsigned integer, from 0 to 63
 CoinState GetCoinState(uint6 square_index);
 
-uint16 ComputeXOROfHeads() {
+uint6 ComputeXOROfHeads() {
   uint6 xor_of_heads = 0;
   for (uint6 i = 0; i < 64; i++) {
     if (GetCoinState(i) == Heads) {
       xor_of_heads = xor_of_heads ^ i;  // This is a bitwise XOR
     }
   }
+  return xor_of_heads;
 }
 
 ```
@@ -73,7 +74,11 @@ GuessMagicSquare(ComputeXOROfHeads());
 - The number of squares on the board must be a power of 2. Otherwise, there is no solution. I will explore this in more detail below, using group theory. For an alternate explanation of this based on graph-coloring, please view https://www.youtube.com/watch?v=wTJI_WuZSwE. 
 - There are ways to optimize the above algorithm to make it more human-friendly to compute.  For a description, please view https://www.youtube.com/watch?v=as7Gkm7Y7h4.
 
-## The Explanation
+## The Short Explanation
+
+Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles that coin to make the board state $c_{0} \oplus ($c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
+
+## The Long Explanation
 
 ### Set-up
 
