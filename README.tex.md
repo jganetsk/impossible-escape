@@ -76,7 +76,7 @@ GuessMagicSquare(ComputeXOROfHeads());
 
 ## The Short Explanation
 
-Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles a coin to make the board state $c_{0} \oplus ($c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
+Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles a coin to make the board state $c_{0} \oplus (c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
 
 ## The Long Explanation
 
