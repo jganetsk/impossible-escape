@@ -128,7 +128,7 @@ In order to make $C$ a group, we need to be able to answer the question *what do
 We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
 - Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
-- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at after a series of valid moves (aka single coin toggles).
+- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - Let $f$ be a group homomorphism from $f : C \rightarrow S$
@@ -136,13 +136,13 @@ We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$
 
 Let's now solve for $\Delta c$, the move prisoner #1 should make:
 
-$$f(c_{1}) = s$$
+$$f(c_{1}) = s_{m}$$
 
-$$f(c_{0} + \Delta c) = s$$
+$$f(c_{0} + \Delta c) = s_{m}$$
 
-$$f(c_{0}) + f(\Delta c) = s$$
+$$f(c_{0}) + f(\Delta c) = s_{m}$$
 
-$$f(\Delta c) = s - f(c_{0})$$
+$$f(\Delta c) = s_{m} - f(c_{0})$$
 
 We will now introduce the usage of the inverse image, $f^{-1}$
 
@@ -154,7 +154,7 @@ $$\Delta c \in f^{-1}[s - f(c_{0})]$$
 
 The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
 
-To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (any basis of a 64-dimension vector space has 64 elements) and there are 64 elements in $S$ (as it is the set of all squares). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
+To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (there are 64 valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
 
 There are two main questions that remain:
 
@@ -174,12 +174,30 @@ The first intuition many seem to have when trying to solve this problem is to ma
 
 The theoretical reason for this there are no valid nontrivial homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we would not be able to construct $f$.
 
-The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we realize that $S$ must also be self-inverting, or $$\forall c \in C: f(c) + f(c) = e$$ or in other words $$\forall s \in S: s + s = e$$ or $$\forall s \in S: s = -s$$ 
+The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we see, realize that $S$ must also be self-inverting:
+
+$$\forall c \in C: f(c + c) = f(e)$$
+
+$$\forall c \in C: f(c) + f(c) = e$$
+
+Since $f[C] = S$:
+
+$$\forall s \in S: s + s = e$$
+
+$$\forall s in \S: s = -s$$
 
 $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in this group $-2 = 62$. 
 
 Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
 
-Recall that $$\Delta c \in f^{-1}[s - f(c_{0})]$$ Using the fact that $-s = s$ we can simplify this to $$\Delta c \in f^{-1}[s + f(c_{0})]$$
+Recall:
+
+$$\Delta c \in f^{-1}[s_{m} - f(c_{0})]$$
+
+$$\forall s in \S: s = -s$$
+
+We can make the simplification:
+
+$$\Delta c \in f^{-1}[s_{m} + f(c_{0})]$$
 
 
