@@ -76,13 +76,15 @@ GuessMagicSquare(ComputeXOROfHeads());
 
 ## The Short Explanation
 
-Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles that coin to make the board state $c_{0} \oplus ($c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
+Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles a coin to make the board state $c_{0} \oplus ($c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
 
 ## The Long Explanation
 
+Personally, I find it insufficient to merely describe the solution. I need to describe the methodology used to arrive at it. Arriving at a good solution should not require neither guessing nor large logical leaps, but should rather be uncovered methodically as a small step in a reasoned argument.
+
 ### Set-up
 
-From now on, we will encode tails as $0$ and heads as $1$. We will commonly refer to the field $\{0, 1\}$.
+From now on, we will encode tails as $0$ and heads as $1$. The field $\{0, 1\}$ will be commonly referenced below.
 
 We are interested in understanding 2 sets:
 
@@ -93,10 +95,10 @@ We would like to define a function that the prisoners can use to encode a square
 
 $$f : C \rightarrow S$$
 
-- Our objective is to convey a secret $s \in S$.
+- Our objective is to convey a secret $s_{m} \in S$.
 - Given some initial chessboard state $c_{0} \in C$ chosen by the jailer
-- Prisoner #1 will want to change the chessboard state from $c_{0}$ to $c_{1} \in C$ by toggling a single coin such that $f(c_{1}) = s$
-- Prisoner #2 will observe the chessboard state $c_{1}$ and compute $f(c_{1})$, using that to guess $s$
+- Prisoner #1 will want to change the chessboard state from $c_{0}$ to $c_{1} \in C$ by toggling a single coin such that $f(c_{1}) = s_{m}$
+- Prisoner #2 will observe the chessboard state $c_{1}$ and compute $f(c_{1})$, using that to guess $s_{m}$
 
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups, and make $f$ a group homomorphism.
@@ -111,9 +113,9 @@ and $S$ groups, and make $f$ a group homomorphism.
 - The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
 
 #### Additional Definitions
-- A group $G$ might have a basis $B = \{b_{1}, b_{2}, \dots, b_{n}\}, B \subset G$. This means that every element in the group can be expressed as a sum of some subset of basis elements: $\forall g \in G : g = \displaystyle\sum_{i} b_{i}$
 - A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- A standard basis is a basis for a vector space where each element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ or $\left(\begin{smallmatrix}0 & 1 & 0 & \dots & 0 \end{smallmatrix}\right)$, etc
+- Every vector space $F^{n}$ has a basis: a set of $n$ elements $B = \{b_{1}, b_{2}, \dots, b_{n}\} \subset F^{n}$ such that each element of the vector space can be expressed as a unique sum of basis elements: $\forall v \in F^{n} : v = \displaystyle\sum_{i=1}^{n} f_{i}b_{i}, f_{i} \in F, b_{i} \in B$
+- A standard basis is a basis of a vector space where each basis element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ or $\left(\begin{smallmatrix}0 & 1 & 0 & \dots & 0 \end{smallmatrix}\right)$, etc
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
 - The image of a set $C$ under $f$ is $f[C] = \{f(c) \mid c \in C\}$
@@ -126,6 +128,8 @@ In order to make $C$ a group, we need to be able to answer the question *what do
 We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
 - Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
+- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at after a series of valid moves (aka single coin toggles).
+
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - Let $f$ be a group homomorphism from $f : C \rightarrow S$
 - We know that $S$ is a set with 64 elements, but we have not yet decided how to make it into a group. That will come later.
