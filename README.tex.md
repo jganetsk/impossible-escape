@@ -9,22 +9,30 @@ A jailer takes two prisoners and tells them "we're going to play a game. If you 
 ### Prisoner #1 and Prisoner #2, prior to the game:
 Enumerate all 64 squares on the board, 0..63. We will work with these values in binary, as 6-bit unsigned integers: 000000, 000001, 000010, etc.
 
-For example, on a 4x4 board, you might enumerate the squares this way:
+For example:
 |||||
 |-|-|-|-|
-| 0 | 1 | 2 | 3 |
-| 4 | 5 | 6 | 7 |
-| 8 | 9 | 10 | 11|
-| 12 | 13 | 14 | 15|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+| 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+| 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 |
+| 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 |
+| 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 |
+| 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 |
+| 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
 
 Or, in binary:
 
+
 |||||
 |-|-|-|-|
-| 0000 | 0001 | 0010 | 0011 |
-| 0100 | 0101 | 0110 | 0111 |
-| 1000 | 1001 | 1010 | 1011|
-| 1100 | 1101 | 1110 | 1111|
+|  001000 |  001001 |  001010 |  001011 |  001100 |  001101 |  001110 |  001111 |  
+|  010000 |  010001 |  010010 |  010011 |  010100 |  010101 |  010110 |  010111 |  
+|  011000 |  011001 |  011010 |  011011 |  011100 |  011101 |  011110 |  011111 |  
+|  100000 |  100001 |  100010 |  100011 |  100100 |  100101 |  100110 |  100111 |  
+|  101000 |  101001 |  101010 |  101011 |  101100 |  101101 |  101110 |  101111 |  
+|  110000 |  110001 |  110010 |  110011 |  110100 |  110101 |  110110 |  110111 |  
+|  111000 |  111001 |  111010 |  111011 |  111100 |  111101 |  111110 |  111111 | 
 
 ### Code
 
@@ -125,7 +133,7 @@ and $S$ groups, and make $f$ a group homomorphism.
 
 In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identity element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
 
-We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
+We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, this group is also Abelian, in case we happen to use commutativity below.
 
 - Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
 - Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
@@ -163,7 +171,13 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so
+
+$$c = \displaystyle\sum_{i} b_{i}$$
+
+$$f(c) = f(\displaystyle\sum_{i} b_{i})$$
+
+$$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
@@ -176,6 +190,8 @@ The theoretical reason for this there are no valid nontrivial homomorphisms from
 
 The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we see, realize that $S$ must also be self-inverting:
 
+$$\forall c \in C: c + c = e$$
+
 $$\forall c \in C: f(c + c) = f(e)$$
 
 $$\forall c \in C: f(c) + f(c) = e$$
@@ -184,9 +200,9 @@ Since $f[C] = S$:
 
 $$\forall s \in S: s + s = e$$
 
-$$\forall s in \S: s = -s$$
+$$\forall s \in S: s = -s$$
 
-$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in this group $-2 = 62$. 
+$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. 
 
 Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
 
@@ -194,10 +210,8 @@ Recall:
 
 $$\Delta c \in f^{-1}[s_{m} - f(c_{0})]$$
 
-$$\forall s in \S: s = -s$$
+$$\forall s \in S: s = -s$$
 
-We can make the simplification:
+We can make this minor simplification:
 
 $$\Delta c \in f^{-1}[s_{m} + f(c_{0})]$$
-
-
