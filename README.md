@@ -10,8 +10,8 @@ A jailer takes two prisoners and tells them "we're going to play a game. If you 
 Enumerate all 64 squares on the board, 0..63. We will work with these values in binary, as 6-bit unsigned integers: 000000, 000001, 000010, etc.
 
 For example:
-|||||
-|-|-|-|-|
+|||||||||
+|-|-|-|-|-|-|-|-|
 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
@@ -24,8 +24,8 @@ For example:
 Or, in binary:
 
 
-|||||
-|-|-|-|-|
+|||||||||
+|-|-|-|-|-|-|-|-|
 |  001000 |  001001 |  001010 |  001011 |  001100 |  001101 |  001110 |  001111 |  
 |  010000 |  010001 |  010010 |  010011 |  010100 |  010101 |  010110 |  010111 |  
 |  011000 |  011001 |  011010 |  011011 |  011100 |  011101 |  011110 |  011111 |  
