@@ -172,13 +172,7 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so
-
-$$c = \displaystyle\sum_{i} b_{i}$$
-
-$$f(c) = f(\displaystyle\sum_{i} b_{i})$$
-
-$$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
