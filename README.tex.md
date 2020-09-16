@@ -113,8 +113,8 @@ and $S$ groups, and make $f$ a group homomorphism.
 - The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
 
 #### Additional Definitions
-- A vector space of $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- Every vector space $F^{n}$ has a basis: a set of $n$ elements $B = \{b_{1}, b_{2}, \dots, b_{n}\} \subset F^{n}$ such that each element of the vector space can be expressed as a unique sum of basis elements: $\forall v \in F^{n} : v = \displaystyle\sum_{i=1}^{n} f_{i}b_{i}, f_{i} \in F, b_{i} \in B$
+- A vector space $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
+- Every vector space $F^{n}$ has a basis: a set of $n$ elements $B = \{b_{1}, b_{2}, \dots, b_{n}\} \subset F^{n}$ such that each element of the vector space can be expressed as a unique sum of basis elements: $\forall v \in F^{n} : v = \displaystyle\sum_{i=1}^{n} f_{i}b_{i}$ where $f_{i} \in F, b_{i} \in B$
 - A standard basis is a basis of a vector space where each basis element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ or $\left(\begin{smallmatrix}0 & 1 & 0 & \dots & 0 \end{smallmatrix}\right)$, etc
 - A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
 - As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
@@ -154,7 +154,7 @@ $$\Delta c \in f^{-1}[s - f(c_{0})]$$
 
 The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
 
-To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (there are 64 valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
+To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (there are 64 possible valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
 
 There are two main questions that remain:
 
@@ -163,7 +163,7 @@ There are two main questions that remain:
 
 And the answers:
 
-1. This is straightforward. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ therefore $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ and finally $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
