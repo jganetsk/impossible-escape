@@ -9,22 +9,30 @@ A jailer takes two prisoners and tells them "we're going to play a game. If you 
 ### Prisoner #1 and Prisoner #2, prior to the game:
 Enumerate all 64 squares on the board, 0..63. We will work with these values in binary, as 6-bit unsigned integers: 000000, 000001, 000010, etc.
 
-For example, on a 4x4 board, you might enumerate the squares this way:
+For example:
 |||||
 |-|-|-|-|
-| 0 | 1 | 2 | 3 |
-| 4 | 5 | 6 | 7 |
-| 8 | 9 | 10 | 11|
-| 12 | 13 | 14 | 15|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+| 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+| 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 |
+| 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 |
+| 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 |
+| 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 |
+| 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
 
 Or, in binary:
 
+
 |||||
 |-|-|-|-|
-| 0000 | 0001 | 0010 | 0011 |
-| 0100 | 0101 | 0110 | 0111 |
-| 1000 | 1001 | 1010 | 1011|
-| 1100 | 1101 | 1110 | 1111|
+|  001000 |  001001 |  001010 |  001011 |  001100 |  001101 |  001110 |  001111 |  
+|  010000 |  010001 |  010010 |  010011 |  010100 |  010101 |  010110 |  010111 |  
+|  011000 |  011001 |  011010 |  011011 |  011100 |  011101 |  011110 |  011111 |  
+|  100000 |  100001 |  100010 |  100011 |  100100 |  100101 |  100110 |  100111 |  
+|  101000 |  101001 |  101010 |  101011 |  101100 |  101101 |  101110 |  101111 |  
+|  110000 |  110001 |  110010 |  110011 |  110100 |  110101 |  110110 |  110111 |  
+|  111000 |  111001 |  111010 |  111011 |  111100 |  111101 |  111110 |  111111 | 
 
 ### Code
 
@@ -125,7 +133,7 @@ and <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" alig
 
 In order to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identity element <img src="svgs/b8554c00e366606e9293d43bcd472ed8.svg?invert_in_darkmode" align=middle width=40.670025pt height=22.46574pt/> could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>.
 
-We will choose to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> the vector space <img src="svgs/a3e5d1ccf05bfb09b34a944361a4dcfa.svg?invert_in_darkmode" align=middle width=53.287905pt height=26.76201pt/>. In other words, <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
+We will choose to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> the vector space <img src="svgs/a3e5d1ccf05bfb09b34a944361a4dcfa.svg?invert_in_darkmode" align=middle width=53.287905pt height=26.76201pt/>. In other words, <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is the group of 64-bit bitvectors under the XOR operator. Incidentally, this group is also Abelian, in case we happen to use commutativity below.
 
 - Note the standard basis <img src="svgs/e501c3fbaf8b825ac927568e9ecd1beb.svg?invert_in_darkmode" align=middle width=48.13578pt height=22.46574pt/> is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
 - Since the field of the vector space is <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>, we can simplify the definition of "basis" by removing the scalar multiplication: <img src="svgs/ddf99885c877e14e906750895a2c952e.svg?invert_in_darkmode" align=middle width=164.387355pt height=38.79018pt/> for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
@@ -163,7 +171,13 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element <img src="svgs/374ff7af31c1eefcd9d7c9f484d61d43.svg?invert_in_darkmode" align=middle width=40.12965pt height=22.46574pt/> can be expressed as a sum of basis elements <img src="svgs/d2b3d983e09b253946f6fe3c72098eda.svg?invert_in_darkmode" align=middle width=45.91224pt height=22.83138pt/>, so <p align="center"><img src="svgs/7223690b61ae166c528c67916071d7e3.svg?invert_in_darkmode" align=middle width=67.221165pt height=36.65541pt/></p> therefore <p align="center"><img src="svgs/a8112cdbf2fc8e87d688a8b8c998f32e.svg?invert_in_darkmode" align=middle width=113.24874pt height=36.65541pt/></p> and finally <p align="center"><img src="svgs/3c93abebd3b56d1fbd29ce4f417a8734.svg?invert_in_darkmode" align=middle width=113.24874pt height=36.65541pt/></p> And we already have definitions of <img src="svgs/bc47eb54c896114e803bd8d0e087caf4.svg?invert_in_darkmode" align=middle width=29.65776pt height=24.6576pt/> for all <img src="svgs/760318998b5f14fb225b3862a8ff1901.svg?invert_in_darkmode" align=middle width=40.439355pt height=22.83138pt/>, so we are done here.
+1. Each element <img src="svgs/374ff7af31c1eefcd9d7c9f484d61d43.svg?invert_in_darkmode" align=middle width=40.12965pt height=22.46574pt/> can be expressed as a sum of basis elements <img src="svgs/d2b3d983e09b253946f6fe3c72098eda.svg?invert_in_darkmode" align=middle width=45.91224pt height=22.83138pt/>, so
+
+<p align="center"><img src="svgs/7223690b61ae166c528c67916071d7e3.svg?invert_in_darkmode" align=middle width=67.221165pt height=36.65541pt/></p>
+
+<p align="center"><img src="svgs/a8112cdbf2fc8e87d688a8b8c998f32e.svg?invert_in_darkmode" align=middle width=113.24874pt height=36.65541pt/></p>
+
+<p align="center"><img src="svgs/3c93abebd3b56d1fbd29ce4f417a8734.svg?invert_in_darkmode" align=middle width=113.24874pt height=36.65541pt/></p> And we already have definitions of <img src="svgs/bc47eb54c896114e803bd8d0e087caf4.svg?invert_in_darkmode" align=middle width=29.65776pt height=24.6576pt/> for all <img src="svgs/760318998b5f14fb225b3862a8ff1901.svg?invert_in_darkmode" align=middle width=40.439355pt height=22.83138pt/>, so we are done here.
 1. Now comes the interesting part. What do use as a group for <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/>?
 
 #### Choosing a group for <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/>
@@ -176,6 +190,8 @@ The theoretical reason for this there are no valid nontrivial homomorphisms from
 
 The main insight is in realizing that <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is *self-inverting*: <img src="svgs/17b1e895acf0f8e13f0ff6ca0d49cddf.svg?invert_in_darkmode" align=middle width=126.85101pt height=22.83138pt/>. In other words, x XOR x is always zero. If we apply <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>, then we see, realize that <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must also be self-inverting:
 
+<p align="center"><img src="svgs/cc3be83ab2dbafae183ef4d508302b5b.svg?invert_in_darkmode" align=middle width=126.85101pt height=12.7854045pt/></p>
+
 <p align="center"><img src="svgs/a3badf8efdfa5afe3063a231fe2ff9ae.svg?invert_in_darkmode" align=middle width=172.05705pt height=16.438356pt/></p>
 
 <p align="center"><img src="svgs/a216f6a14527bc196bee9cb1f1dff1c6.svg?invert_in_darkmode" align=middle width=172.05705pt height=16.438356pt/></p>
@@ -184,9 +200,9 @@ Since <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" al
 
 <p align="center"><img src="svgs/86ce8846af16bf5f531b68504cd11a1e.svg?invert_in_darkmode" align=middle width=126.728745pt height=12.7854045pt/></p>
 
-<p align="center"><img src="svgs/f4992aa1b9b3699ae2ce779847e2d12a.svg?invert_in_darkmode" align=middle width=103.486515pt height=14.611872pt/></p>
+<p align="center"><img src="svgs/a06ed81cafc6f1f8c27d2733a9122134.svg?invert_in_darkmode" align=middle width=111.768855pt height=12.7854045pt/></p>
 
-<img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/> is not self-inverting. For example, this would require that <img src="svgs/3f85da2e02a67cb0022399fe72188984.svg?invert_in_darkmode" align=middle width=51.141585pt height=21.18732pt/>, but in this group <img src="svgs/98706f43aab06e1c6a51059f936547cc.svg?invert_in_darkmode" align=middle width=59.36073pt height=21.18732pt/>. 
+<img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/> is not self-inverting. For example, this would require that <img src="svgs/3f85da2e02a67cb0022399fe72188984.svg?invert_in_darkmode" align=middle width=51.141585pt height=21.18732pt/>, but in that group <img src="svgs/98706f43aab06e1c6a51059f936547cc.svg?invert_in_darkmode" align=middle width=59.36073pt height=21.18732pt/>. 
 
 Which group has 64 elements and is self-inverting? The group <img src="svgs/7446d816a12be7b02fbd14ddf09acf47.svg?invert_in_darkmode" align=middle width=46.73526pt height=26.76201pt/>. In other words, <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> is 6-dimensional vector space over the field <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>, also known as the group of 6-bit bitvectors under the XOR operator.
 
@@ -194,10 +210,8 @@ Recall:
 
 <p align="center"><img src="svgs/33570e8d856faa4ead987d0c1be4e8de.svg?invert_in_darkmode" align=middle width=154.876425pt height=18.31236pt/></p>
 
-<p align="center"><img src="svgs/f4992aa1b9b3699ae2ce779847e2d12a.svg?invert_in_darkmode" align=middle width=103.486515pt height=14.611872pt/></p>
+<p align="center"><img src="svgs/a06ed81cafc6f1f8c27d2733a9122134.svg?invert_in_darkmode" align=middle width=111.768855pt height=12.7854045pt/></p>
 
-We can make the simplification:
+We can make this minor simplification:
 
 <p align="center"><img src="svgs/1c4614f2381217321b581ffe3365a0a4.svg?invert_in_darkmode" align=middle width=154.876425pt height=18.31236pt/></p>
-
-
