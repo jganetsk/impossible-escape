@@ -76,11 +76,11 @@ GuessMagicSquare(ComputeXOROfHeads());
 
 ## The Short Explanation
 
-Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles a coin to make the board state $c_{0} \oplus (c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
+Prisoner #1 sees board state $c_{0}$. Then prisoner #1 computes $c_{0} \oplus s_{m}$ and toggles that coin to make the board state $c_{0} \oplus (c_{0} \oplus s_{m})$ which is equal to $s_{m}$.
 
 ## The Long Explanation
 
-Personally, I find it insufficient to merely describe the solution. I need to describe the methodology used to arrive at it. Arriving at a good solution should not require neither guessing nor large logical leaps, but should rather be uncovered methodically as a small step in a reasoned argument.
+Personally, I find it insufficient to merely describe the solution. I need to describe the methodology used to arrive at it. Arriving at a good solution should not require neither guessing nor large logical leaps, but should rather be uncovered methodically as a small step in a reasoned argument. In fact, I will attempt to explain why there can be no other solution.
 
 ### Set-up
 
@@ -123,7 +123,7 @@ and $S$ groups, and make $f$ a group homomorphism.
 
 ### Applying Group Theory to the Problem
 
-In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identify element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identity element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
 
 We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, these groups are also Abelian, in case we happen to use commutativity below.
 
@@ -146,20 +146,20 @@ $$f(\Delta c) = s_{m} - f(c_{0})$$
 
 We will now introduce the usage of the inverse image, $f^{-1}$
 
-$$f^{-1}[f(\Delta c)] = f^{-1}[s - f(c_{0})]$$
+$$f^{-1}[f(\Delta c)] = f^{-1}[s_{m} - f(c_{0})]$$
 
 Therefore:
 
-$$\Delta c \in f^{-1}[s - f(c_{0})]$$
+$$\Delta c \in f^{-1}[s_{m} - f(c_{0})]$$
 
-The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
+The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s_{m}$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
 
-To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is simple to guarantee. There are 64 elements in $B$ (there are 64 possible valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
+To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is straightforward. There are 64 elements in $B$ (there are 64 possible valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
 
 There are two main questions that remain:
 
 1. We have defined the values of $f(b)$ where $b \in B$. We must now define the remaining values of $f(c)$ where $c \in C$.
-1. We must still need to make $S$ into a group. Without this, we cannot compute $s - f(c_{0})$, for we have not defined the $+$ operator yet.
+1. We still need to make $S$ into a group. Without this, we cannot compute $s_{m} - f(c_{0})$, for we have not defined the $+$ operator yet.
 
 And the answers:
 
