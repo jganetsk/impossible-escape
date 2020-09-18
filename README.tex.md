@@ -144,7 +144,7 @@ The meaning of $0$ vs $1$ depends on whether we are interpreting the group as ch
 - Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles).
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
-- Let $f$ be a group homomorphism from $f : C \rightarrow S$
+- Let $f$ be a group homomorphism from $f : C \rightarrow S$. In particular, we want to guarantee that $f$ is surjective, aka "onto", aka $f[C] = S$. Otherwise, we would not be able to encode all possible magic squares.
 - We know that $S$ is a set with 64 elements, but we have not yet decided how to make it into a group. That will come later.
 
 Let's now solve for $\Delta c$, the move prisoner #1 should make:
@@ -185,7 +185,7 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
 
-The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we see, realize that $S$ must also be self-inverting:
+The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. When we apply $f$, we see realize that $S$ must also be self-inverting:
 
 $$\forall c \in C: c + c = e$$
 
@@ -201,7 +201,7 @@ $$\forall s \in S: s = -s$$
 
 $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. Therefore, we cannot construct a homomorphism $f$ such that $f[C] = \mathbb{Z}/64\mathbb{Z}$. It is impossible.
 
-Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be "the same kind of group as" $C$, a vector space over $\{0, 1\}$.
+Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$.
 
 Recall:
 
@@ -218,9 +218,9 @@ $$\Delta c \in f^{-1}[s_{m} + f(c_{0})]$$
 We will now translate the math above into the C++ code in the first section.
 
 - Wherever we see $+$, we replace it with `^`, the bitwise XOR operator.
-- Wherever we see $f(c \in C)$ where $c$ is the current board state, replace it with `ComputeXOROfHeads()`.
+- Wherever we see $f(c \in C)$ where $c$ is the current board state, we replace it with `ComputeXOROfHeads()`.
 - Wherever we see $f(b \in B)$, we replace it with `i`, a `uint6` representing the 6-bit encoding of the square on the chessboard.
-- The implementation of `ComputeXOROfHeads` corresponds to $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
+- The implementation of `ComputeXOROfHeads` corresponds to $f(c) = \displaystyle\sum_{i} f(b_{i})$
 - `GetMagicSquareIndex() ^ ComputeXOROfHeads()` corresponds to $s_{m} + f(c_{0})$
 
 ## Appendix
