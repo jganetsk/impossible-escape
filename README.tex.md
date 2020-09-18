@@ -206,15 +206,15 @@ Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$, or 
 You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ vector with a $64 \times 6$ matrix, resulting in a $1 \times 6$ vector. The matrix would look like this:
 
 $$\begin{pmatrix}
-0 & 0 & 0 & 0 & \dots & 1\\
-0 & 0 & 0 & 0 & \dots & 1\\
-0 & 0 & 0 & 0 & \dots & 1\\
-0 & 0 & 0 & 0 & \dots & 1\\
-0 & 0 & 1 & 1 & \dots & 1\\
-0 & 1 & 0 & 1 & \dots & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & 1\\
+0 & 0 & 0 & 0 & 1 & 1 & \dots & 1\\
+0 & 0 & 1 & 1 & 0 & 1 & \dots & 1\\
+0 & 1 & 0 & 1 & 1 & 0 & \dots & 1\\
 \end{pmatrix}$$
 
-This is definitely a homomorphism.
+Matrix multiplication is a group homomorphism.
 
 #### A Small Simplification
 

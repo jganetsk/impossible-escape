@@ -205,9 +205,9 @@ Which group has 64 elements and is self-inverting? The group <img src="svgs/7446
 
 You may not yet be convinced that <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> is a homomorphism. At this point, we can actually represent <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> as matrix multiplication of a <img src="svgs/301cd3bb428dd419c0d5297a8dbb1151.svg?invert_in_darkmode" align=middle width=44.748825pt height=21.18732pt/> vector with a <img src="svgs/388a92a7f9b8de7a7e5ad99b56aeed0b.svg?invert_in_darkmode" align=middle width=44.748825pt height=21.18732pt/> matrix, resulting in a <img src="svgs/98179e552bb4479228248cc851cd0063.svg?invert_in_darkmode" align=middle width=36.52968pt height=21.18732pt/> vector. The matrix would look like this:
 
-<p align="center"><img src="svgs/94fd4ab5ec8d57af02434f5e70a53bb5.svg?invert_in_darkmode" align=middle width=173.9727pt height=118.357305pt/></p>
+<p align="center"><img src="svgs/554594bbaff3938bf85961d4a10884c1.svg?invert_in_darkmode" align=middle width=223.2879pt height=118.357305pt/></p>
 
-This is definitely a homomorphism.
+Matrix multiplication is a group homomorphism.
 
 #### A Small Simplification
 
