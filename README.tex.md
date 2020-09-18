@@ -251,7 +251,14 @@ Remember above we said that, in order to guarantee the existence of a legal move
 
 So can we guarantee that $f[C] = S$? In other words, can we guarantee that $|f[C]|$ = $|S|$?
 
-We can prove that $\forall f : \{0, 1\}^{n} \rightarrow G, f[\{0, 1\}^{n}] = \{0, 1\}^{m}, 0 \leq m \leq n$. In other words, the image of any homomorphism from a vector space over ${0, 1}$ is itself isomorphic to a vector space over ${0, 1}$ of same or reduced dimension.
+The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Fundamental_theorem_on_homomorphisms)
+
+> Fundamental Homomorphism Theorem
+>
+> Every homomorphic image of a group is isomorphic to a quotient group
+
+
+
 
 ## Appendix
 

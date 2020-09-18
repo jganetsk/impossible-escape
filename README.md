@@ -244,7 +244,14 @@ Remember above we said that, in order to guarantee the existence of a legal move
 
 So can we guarantee that <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>? In other words, can we guarantee that <img src="svgs/7a15a460132f9dfa824ba4e48abbb958.svg?invert_in_darkmode" align=middle width=41.006955pt height=24.6576pt/> = <img src="svgs/65840c883e7323ab67192c3db4729de1.svg?invert_in_darkmode" align=middle width=20.159865pt height=24.6576pt/>?
 
-We can prove that <img src="svgs/d271bf4b4f52e3195c4fdfb67fd9e568.svg?invert_in_darkmode" align=middle width=353.908005pt height=24.6576pt/>. In other words, the image of any homomorphism from a vector space over <img src="svgs/ad90c6be0f62df1731c9e59805054bff.svg?invert_in_darkmode" align=middle width=23.744325pt height=21.18732pt/> is itself isomorphic to a vector space over <img src="svgs/ad90c6be0f62df1731c9e59805054bff.svg?invert_in_darkmode" align=middle width=23.744325pt height=21.18732pt/> of same or reduced dimension.
+The answer is yes, if and only if <img src="svgs/65840c883e7323ab67192c3db4729de1.svg?invert_in_darkmode" align=middle width=20.159865pt height=24.6576pt/> is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Fundamental_theorem_on_homomorphisms)
+
+> Fundamental Homomorphism Theorem
+>
+> Every homomorphic image of a group is isomorphic to a quotient group
+
+
+
 
 ## Appendix
 
