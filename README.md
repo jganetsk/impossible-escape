@@ -240,7 +240,10 @@ We will now translate the math above into the C++ code in the first section.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in <img src="svgs/bb2340bc819a3e831b8cbfd2391d67c6.svg?invert_in_darkmode" align=middle width=113.972925pt height=26.76201pt/>, we must guarantee <img src="svgs/71cb5ef0976705bb1329f4431a68cb9b.svg?invert_in_darkmode" align=middle width=65.188365pt height=24.6576pt/>. To be more precise, we must guarantee that <img src="svgs/7c824f3c569b0a60602ee689772d69f3.svg?invert_in_darkmode" align=middle width=86.035455pt height=24.6576pt/>.
+Remember above we said that, in order to guarantee the existence of a legal move in <img src="svgs/bb2340bc819a3e831b8cbfd2391d67c6.svg?invert_in_darkmode" align=middle width=113.972925pt height=26.76201pt/>, we must guarantee <img src="svgs/71cb5ef0976705bb1329f4431a68cb9b.svg?invert_in_darkmode" align=middle width=65.188365pt height=24.6576pt/>. This is sufficient only if <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>. To be more rigorous, we can say that we should actually guarantee that <img src="svgs/7c824f3c569b0a60602ee689772d69f3.svg?invert_in_darkmode" align=middle width=86.035455pt height=24.6576pt/>.
+
+In general, we can guarantee that <img src="svgs/f438b64c9eff986c7d49215e9df850a6.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>. Stepping back, can we guarantee that <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>  for all values of <img src="svgs/65840c883e7323ab67192c3db4729de1.svg?invert_in_darkmode" align=middle width=20.159865pt height=24.6576pt/>?
+
 
 
 ## Appendix

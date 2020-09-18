@@ -247,7 +247,10 @@ We will now translate the math above into the C++ code in the first section.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} - f(c_{0})]$, we must guarantee $f[B] = S$. To be more precise, we must guarantee that $f[B] = f[C]$.
+Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} - f(c_{0})]$, we must guarantee $f[B] = S$. This is sufficient only if $f[C] = S$. To be more rigorous, we can say that we should actually guarantee that $f[B] = f[C]$.
+
+In general, we can guarantee that $S \subseteq f[C]$. Stepping back, can we guarantee that $f[C] = S$  for all values of $|S|$?
+
 
 
 ## Appendix
