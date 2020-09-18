@@ -89,11 +89,15 @@ Prisoner #1 sees board state $c_{0}$. Then, prisoner #1 computes $c_{0} \oplus s
 
 ## The Long Explanation
 
-Personally, I find it insufficient to merely describe the solution. I need to describe the methodology used to arrive at it. Arriving at a good solution should not require neither guessing nor large logical leaps, but should rather be uncovered methodically as a small step in a reasoned argument. In fact, I will attempt to explain why there can be no other solution.
+> Feynman's Algorithm:
+>
+> 1. Write down the problem.
+> 2. Think very hard.
+> 3. Write down the solution.
+
+I find it insufficient to merely describe the solution, I am motivated to describe the methodology used to arrive at it. The point of algebra (both in its elementary form and its various more abstract forms) is to provide a means to express the constraints of a problem such that the solution flows natrually from the constraints. Instead of anticipating a logical leap to an answer, you should continue to refine the expression of constraints until the answer has no choice but to reveal itself to you.
 
 ### Set-up
-
-From now on, we will encode tails as $0$ and heads as $1$. The field $\{0, 1\}$ will be commonly referenced below.
 
 We are interested in understanding 2 sets:
 
@@ -112,30 +116,29 @@ $$f : C \rightarrow S$$
 Since we want to understand how the function $f$ behaves with respect to changes in its input, we will need more algebraic structure. We need to make $C$
 and $S$ groups, and make $f$ a group homomorphism.
 
-### Review of Group Theory
-
-#### What is a Group?
-- A group $G$ is the tuple $(S, e, +)$.
-- It is a set $S$ with an associative binary operator $+$
-- The set contains an identity element $e \in S$ such that $\forall s \in S : s + e = s$
-- Each element $s \in S$ has an inverse element $-s \in S$ such that $\forall s \in S : s + (-s) = e$
-- The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
-
-#### Additional Definitions
-- A vector space $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
-- Every vector space $F^{n}$ has a basis: a set of $n$ elements $B = \{b_{1}, b_{2}, \dots, b_{n}\} \subset F^{n}$ such that each element of the vector space can be expressed as a unique sum of basis elements: $\forall v \in F^{n} : v = \displaystyle\sum_{i=1}^{n} f_{i}b_{i}$ where $f_{i} \in F, b_{i} \in B$
-- A standard basis is a basis of a vector space where each basis element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ or $\left(\begin{smallmatrix}0 & 1 & 0 & \dots & 0 \end{smallmatrix}\right)$, etc
-- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
-- As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
-- The image of a set $C$ under $f$ is $f[C] = \{f(c) \mid c \in C\}$
-- The preimage or inverse image of a set $S$ under $f$ is $f^{-1}[S] = \{c \in C \mid f(c) \in S\}$
-
 ### Applying Group Theory to the Problem
 
-In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. The identity element $e \in C$ could be interpreted as the zero delta (when interpreting as chessboard state deltas) or as the state of all 64 coins being tails-side up (when interpreting as chessboard states). Conceptually, prisoner #1 must choose an element from a set of 64 chessboard state deltas, which is a subset of $C$.
+I have included a [review of group theory in the appendix](#review-of-group-theory).
 
-We will choose to make $C$ the vector space $\{0, 1\}^{64}$. In other words, $C$ is the group of 64-bit bitvectors under the XOR operator. Incidentally, this group is also Abelian, in case we happen to use commutativity below.
+In order to make $C$ a group, we need to be able to answer the question *what does it mean to add two chessboard states together?* We can answer this by reinterpreting $C$ to be a set of chessboard state *deltas*. Note, this is a formality. There is essentially no difference between a group of states and a group of state deltas, except the latter motivates the intuition of what it means to add two group elements together. 
 
+We will choose to make $C$ the vector space $\{0, 1\}^{64}$, alternately represented as the set of all 64-bit bitvectors under the XOR operator. To review, in the field $\{0, 1\}$, the following identities are true:
+
+$$0 + 0 = 0$$
+
+$$0 + 1 = 1$$
+
+$$1 + 0 = 1$$
+
+$$1 + 1 = 0$$
+
+The meaning of $0$ vs $1$ depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
+
+||$0$|$1$|
+|Chessboard states|Tails|Heads|
+|Chessboard state deltas|Do not toggle the coin|Toggle the coin|
+
+- The group above happens to be Abelian. This means addition is commutative, or $x + y = y + x$
 - Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
 - Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
 
@@ -199,7 +202,7 @@ $$\forall s \in S: s = -s$$
 
 $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. 
 
-Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
+Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is a 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
 
 Recall:
 
@@ -210,3 +213,23 @@ $$\forall s \in S: s = -s$$
 We can make this minor simplification:
 
 $$\Delta c \in f^{-1}[s_{m} + f(c_{0})]$$
+
+## Appendix
+
+### Review of Group Theory
+
+#### What is a Group?
+- A group $G$ is the tuple $(S, e, +)$.
+- It is a set $S$ with an associative binary operator $+$
+- The set contains an identity element $e \in S$ such that $\forall s \in S : s + e = s$
+- Each element $s \in S$ has an inverse element $-s \in S$ such that $\forall s \in S : s + (-s) = e$
+- The $+$ operator may or may not be commutative (when it is commutative, we call the group "Abelian")
+
+#### Additional Definitions
+- A vector space $F^{n}$ is a group consisting of vectors with $n$-dimensions over the field $F$.
+- Every vector space $F^{n}$ has a basis: a set of $n$ elements $B = \{b_{1}, b_{2}, \dots, b_{n}\} \subset F^{n}$ such that each element of the vector space can be expressed as a unique sum of basis elements: $\forall v \in F^{n} : v = \displaystyle\sum_{i=1}^{n} f_{i}b_{i}$ where $f_{i} \in F, b_{i} \in B$
+- A standard basis is a basis of a vector space where each basis element is a vector of the form $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ or $\left(\begin{smallmatrix}0 & 1 & 0 & \dots & 0 \end{smallmatrix}\right)$, etc
+- A group homomorphism is a function $f : F \rightarrow G$ from group $F$ to group $G$ such that $\forall a, b \in F : f(a + b) = f(a) + f(b)$
+- As corollaries to the above, for any group homomorphism $f$, the following are true: $f(e_{F}) = e_{G}$ and $\forall a \in F : f(-a) = -f(a)$
+- The image of a set $C$ under $f$ is $f[C] = \{f(c) \mid c \in C\}$
+- The preimage or inverse image of a set $S$ under $f$ is $f^{-1}[S] = \{c \in C \mid f(c) \in S\}$
