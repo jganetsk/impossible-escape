@@ -247,7 +247,7 @@ We will now translate the math above into the C++ code in the first section.
 ### The Long Explanation
 
 Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This was assuming $f[C] = S$. What happens if the latter is not true?
-- Let's say that $S \subset f[C]$
+- Let's say that $S \subset f[C]$. We cannot even state at this point that $S$ is a group. It might only be a set.
 - We can still have a one-to-one mapping between $B$ and $S$ (there is still the same number of legal moves as there are possible magic squares). But then $f[B] \subset f[C]$
 - The jailer has control over $s_{m}$ and $c_{0}$, which implies the jailer has control over $s_{m} + f(c_{0})$. The jailer could then choose values such that $s_{m} + f(c_{0}) \notin f[B]$. And then prisoner #1 would have no legal move that could be made to put the board into state $c_{1}$ such that $f(c_{1}) = s_{m}$.
 
