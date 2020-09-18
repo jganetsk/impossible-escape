@@ -243,11 +243,11 @@ We will now translate the math above into the C++ code in the first section.
 ### The Short Explanation
 
 - Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127. It is not guaranteed that, from every possible chessboard state, a single coin toggle can be used to cover the full range of possible desired board states [0, 80].
-- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)] looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an $n$-dimensional hypercube, where n is the number of squares on the chessboard. There are $n$ colors. We need to assign each node a color such that all $n$ colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being $2^n$). If the number of colors is not also a power of 2, it will not divide evenly. Some colors will be represented more than others. The video has a more detailed explanation.
+- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)] looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an $n$-dimensional hypercube, where $n$ is the number of squares on the chessboard. There are $n$ colors. We need to assign each node a color such that all $n$ colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being $2^n$). If the number of colors is not also a power of 2, it will not divide evenly. Some colors will be represented more than others. The video has a more detailed explanation.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} - f(c_{0})]$, we must guarantee $f[B] = S$. Or in other words, $f[B] = f[C]$.
+Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} - f(c_{0})]$, we must guarantee $f[B] = S$. To be more precise, we must guarantee that $f[B] = f[C]$.
 
 
 ## Appendix
