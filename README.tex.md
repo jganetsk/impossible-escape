@@ -247,17 +247,19 @@ We will now translate the math above into the C++ code in the first section.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This is sufficient only if $f[C] = S$. To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$. Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well. By definition, we say that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, it's merely a **subset**.
+Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This requires elaboration:
+- Remember that we also required $f[C] = S$
+- To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$
+- Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well
+- By definition, we know that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, here it's merely a **subset**.
 
-So can we guarantee that $f[C] = S$? In other words, can we guarantee that $|f[C]|$ = $|S|$?
+So can we guarantee that $f[C] = S$? 
 
-The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Fundamental_theorem_on_homomorphisms)
+The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Isomorphism_theorems#Theorem_A)
 
-> Fundamental Homomorphism Theorem
+> Fundamental Homomorphism Theorem:
 >
-> Every homomorphic image of a group is isomorphic to a quotient group
-
-
+> Let $G$ and $H$ be groups, and let $f : G \rightarrow H$ be a homomorphism. Then the image of $f$ is isomorphic to the quotient group $G / ker(f)$.
 
 
 ## Appendix
