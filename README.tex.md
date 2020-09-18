@@ -175,7 +175,7 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$. Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles). so $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$. Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles) $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
@@ -200,7 +200,7 @@ $$\forall s \in S: s = -s$$
 
 $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. Therefore, we cannot construct a homomorphism $f$ such that $f[C] = \mathbb{Z}/64\mathbb{Z}$. It is impossible.
 
-Which group has 64 elements and is self-inverting? The vector space $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$.
+Which group has 64 elements and is self-inverting? The vector space $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$. We go into more detail about this below.
 
 You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ input vector with a $64 \times 6$ constant matrix, resulting in a $1 \times 6$ output vector. The matrix would look like this:
 
@@ -248,8 +248,8 @@ We will now translate the math above into the C++ code in the first section.
 
 Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This was assuming $f[C] = S$. What happens if the latter is not true?
 - Let's say that $S \subset f[C]$
-- We can still have a one-to-one mapping between $B$ and $S$ (there is still the same number of legal moves as there are magic squares). But then $f[B] \subset f[C]$
-- The jailer has control over $s_{m}$ and $c_{0}$, which implies the jalier has control over $s_{m} + f(c_{0})$. The jailer could then choose values such that $s_{m} + f(c_{0}) \notin f[B]$. And then prisoner #1 would have no legal move that could be made to put the board into state $c_{1}$ such that $f(c_{1}) = s_{m}$.
+- We can still have a one-to-one mapping between $B$ and $S$ (there is still the same number of legal moves as there are possible magic squares). But then $f[B] \subset f[C]$
+- The jailer has control over $s_{m}$ and $c_{0}$, which implies the jailer has control over $s_{m} + f(c_{0})$. The jailer could then choose values such that $s_{m} + f(c_{0}) \notin f[B]$. And then prisoner #1 would have no legal move that could be made to put the board into state $c_{1}$ such that $f(c_{1}) = s_{m}$.
 
 So can we guarantee that $f[C] = S$? 
 
@@ -268,6 +268,8 @@ Now we are getting into more advanced territory. Without explaining all the deri
 - [LaGrange's theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)) states that for any finite group $G$, the order of every subgroup $H$ of $G$ evenly divides the order of $G$. Since the order of $G$ here is $2^{n}$, then every subgroup (and hence every possible kernel) has order $2^{m}$ where $0 \leq m \leq n$.
 
 At this point, if we know how many elements are in the [quotient group](https://en.wikipedia.org/wiki/Quotient_group) $G / ker(f)$, then we know how many elements are in the image of $f$. And yes, it is as simple as $|G| / |ker(f)|$, which is $2^{n-m}$ where $0 \leq n-m \leq n$.
+
+Note that the fact that the image of $f$ is ismorphic to the quotient group $G / ker(f)$ elaborates on the claim above that $S$ must be "the same kind of group" as $C$. In fact, all homomorphism images of $\{0, 1\}^{n}$ are isomorphic to $\{0, 1\}^{m}, 0 \leq m \leq n$. In other words, they are all vector spaces over the same field.
 
 ## Appendix
 
