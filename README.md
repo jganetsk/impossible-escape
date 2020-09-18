@@ -219,9 +219,18 @@ We will now translate the math above into the C++ code in the first section.
 
 - Wherever we see <img src="svgs/df33724455416439909c33a7db76b2bc.svg?invert_in_darkmode" align=middle width=12.78552pt height=19.17828pt/>, we replace it with `^`, the bitwise XOR operator.
 - Wherever we see <img src="svgs/31b5b986fb2493a1e9ff48a4d00d0409.svg?invert_in_darkmode" align=middle width=62.732505pt height=24.6576pt/> where <img src="svgs/3e18a4a28fdee1744e5e3f79d13b9ff6.svg?invert_in_darkmode" align=middle width=7.113876pt height=14.15535pt/> is the current board state, we replace it with `ComputeXOROfHeads()`.
-- Wherever we see <img src="svgs/e362928854defc86f84307c22a81cf37.svg?invert_in_darkmode" align=middle width=63.04221pt height=24.6576pt/>, we replace it with `i`, a `uint6` representing the 6-bit encoding of the square on the chessboard.
+- Wherever we see <img src="svgs/e362928854defc86f84307c22a81cf37.svg?invert_in_darkmode" align=middle width=63.04221pt height=24.6576pt/>, we replace it with a `uint6` representing the 6-bit encoding of the square on the chessboard.
 - The implementation of `ComputeXOROfHeads` corresponds to <img src="svgs/737ef05c15b685a42179349e1d1984f9.svg?invert_in_darkmode" align=middle width=113.24874pt height=38.79018pt/>
 - `GetMagicSquareIndex() ^ ComputeXOROfHeads()` corresponds to <img src="svgs/9faed75638c2be7d18cffbd1ce43a9af.svg?invert_in_darkmode" align=middle width=77.374605pt height=24.6576pt/>
+
+## The Number of Squares on the Board Must Be a Power of 2
+
+### The Short Explanation
+
+- Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127, and it is not guaranteed that a single coin toggle can be used to arrive at the desired board state in [0, 80].
+- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)], looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an n-dimensional hypercube, where n is the number of squares on the chessboard. There are n colors, and we need to assign each node a color such that all colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being <img src="svgs/f8f25e4580c418a51dc556db0d8d2b93.svg?invert_in_darkmode" align=middle width=16.34523pt height=21.8394pt/>). If the number of colors is not also a power of 2, it will not divide evenly.
+
+### The Long Explanation
 
 ## Appendix
 

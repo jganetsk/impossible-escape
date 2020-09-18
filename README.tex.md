@@ -219,9 +219,18 @@ We will now translate the math above into the C++ code in the first section.
 
 - Wherever we see $+$, we replace it with `^`, the bitwise XOR operator.
 - Wherever we see $f(c \in C)$ where $c$ is the current board state, we replace it with `ComputeXOROfHeads()`.
-- Wherever we see $f(b \in B)$, we replace it with `i`, a `uint6` representing the 6-bit encoding of the square on the chessboard.
+- Wherever we see $f(b \in B)$, we replace it with a `uint6` representing the 6-bit encoding of the square on the chessboard.
 - The implementation of `ComputeXOROfHeads` corresponds to $f(c) = \displaystyle\sum_{i} f(b_{i})$
 - `GetMagicSquareIndex() ^ ComputeXOROfHeads()` corresponds to $s_{m} + f(c_{0})$
+
+## The Number of Squares on the Board Must Be a Power of 2
+
+### The Short Explanation
+
+- Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127, and it is not guaranteed that a single coin toggle can be used to arrive at the desired board state in [0, 80].
+- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)], looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an n-dimensional hypercube, where n is the number of squares on the chessboard. There are n colors, and we need to assign each node a color such that all colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being $2^n$). If the number of colors is not also a power of 2, it will not divide evenly.
+
+### The Long Explanation
 
 ## Appendix
 
