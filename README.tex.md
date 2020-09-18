@@ -267,7 +267,7 @@ The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundame
 Now we are getting into more advanced territory. Without explaining all the derivations, we are going to quickly compose a bunch of theorems to prove that the order of the image of the homomorphism is a power of 2. If you are interested, please do some independent research! The details behind these theorems are fairly accessible!
 
 - We need to know the definition of "[normal subgroups](https://en.wikipedia.org/wiki/Normal_subgroup)". But every subgroup of an Abelian group is normal, and $C$ is Abelian, so we can nip that complexity in the bud.
-- [LaGrange's theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory) states that for any finite group $G$, the order of every subgroup $H$ of $G$ evenly divides the order of $G$. Since the order of $G$ here is $2^{n}$, then every subgroup (and hence every possible kernel) has order $2^{m}$ where $0 \leq m \leq n$.
+- [LaGrange's theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)) states that for any finite group $G$, the order of every subgroup $H$ of $G$ evenly divides the order of $G$. Since the order of $G$ here is $2^{n}$, then every subgroup (and hence every possible kernel) has order $2^{m}$ where $0 \leq m \leq n$.
 
 At this point, if we know how many elements are in the [quotient group](https://en.wikipedia.org/wiki/Quotient_group) $G / ker(f)$, then we know how many elements are in the image of $f$. And yes, it is as simple as $|G| / |ker(f)|$, which is $2^{n-m}, 0 \leq n-m \leq n$.
 
