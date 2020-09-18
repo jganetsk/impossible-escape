@@ -201,7 +201,7 @@ $$\forall s \in S: s = -s$$
 
 $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. Therefore, we cannot construct a homomorphism $f$ such that $f[C] = \mathbb{Z}/64\mathbb{Z}$. It is impossible.
 
-Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$.
+Which group has 64 elements and is self-inverting? The vector space $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$.
 
 You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ vector with a $64 \times 6$ matrix, resulting in a $1 \times 6$ vector. The matrix would look like this:
 
@@ -247,11 +247,11 @@ We will now translate the math above into the C++ code in the first section.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} - f(c_{0})]$, we must guarantee $f[B] = S$. This is sufficient only if $f[C] = S$. To be more rigorous, we can say that we should actually guarantee that $f[B] = f[C]$.
+Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This is sufficient only if $f[C] = S$. To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$. Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well. By definition, we say that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, it's merely a **subset**.
 
-In general, we can guarantee that $S \subseteq f[C]$. Stepping back, can we guarantee that $f[C] = S$  for all values of $|S|$?
+So can we guarantee that $f[C] = S$. In other words, can we guarantee that $|f[C]|$ = $|S|$?
 
-
+We can prove that $\forall f : {0, 1}^{n} -> G, f[{0, 1}^{n}] = {0, 1}^{m}, 0 \leq m \leq n$. In other words, the image of any homomorphism from a vector space over ${0, 1}$ is itself isomorphic to a vector space over ${0, 1}$ of same or reduced dimension.
 
 ## Appendix
 
