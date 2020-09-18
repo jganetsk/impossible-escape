@@ -269,7 +269,7 @@ Now we are getting into more advanced territory. Without explaining all the deri
 
 At this point, if we know how many elements are in the [quotient group](https://en.wikipedia.org/wiki/Quotient_group) $G / ker(f)$, then we know how many elements are in the image of $f$. And yes, it is as simple as $|G| / |ker(f)|$, which is $2^{n-m}$ where $0 \leq n-m \leq n$.
 
-Note that the fact that the image of $f$ is ismorphic to the quotient group $G / ker(f)$ elaborates on the claim above that $S$ must be "the same kind of group" as $C$. In fact, all homomorphism images of $\{0, 1\}^{n}$ are isomorphic to $\{0, 1\}^{m}, 0 \leq m \leq n$. In other words, they are all vector spaces over the same field.
+Note that the fact that the image of $f$ is isomorphic to the quotient group $G / ker(f)$ elaborates on the claim above that $S$ must be the "same kind of group" as $C$. In fact, all homomorphism images of $\{0, 1\}^{n}$ are isomorphic to $\{0, 1\}^{m}, 0 \leq m \leq n$. In other words, they are all vector spaces over the same field.
 
 ## Appendix
 
