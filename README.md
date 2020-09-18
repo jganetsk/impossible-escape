@@ -81,7 +81,7 @@ GuessMagicSquare(ComputeXOROfHeads());
 
 ### Note Well
 - The number of squares on the board must be a power of 2. Otherwise, there is no solution. I will explore this in more detail below, using group theory. There is an alternate explanation of this constraint based on graph-coloring [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwEi)]. 
-- There are ways to optimize the above algorithm to make it more human-friendly to compute.[[YouTube video](https://www.youtube.com/watch?v=as7Gkm7Y7h4)].
+- There are ways to optimize the above algorithm to make it more human-friendly to compute [[YouTube video](https://www.youtube.com/watch?v=as7Gkm7Y7h4)].
 
 ## The Short Explanation
 
@@ -134,7 +134,7 @@ We will choose to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?inver
 
 The meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> vs <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
-||Meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|Meaning of <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|
+|Interpretation of <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>|Meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|Meaning of <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|
 |-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
@@ -203,6 +203,14 @@ Since <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" al
 
 Which group has 64 elements and is self-inverting? The group <img src="svgs/7446d816a12be7b02fbd14ddf09acf47.svg?invert_in_darkmode" align=middle width=46.73526pt height=26.76201pt/>, or the set of 6-bit bitvectors under XOR. It turns out, <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must be the "same kind of group" as <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>, also a vector space over <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>.
 
+You may not yet be convinced that <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> is a homomorphism. At this point, we can actually represent <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> as matrix multiplication of a <img src="svgs/301cd3bb428dd419c0d5297a8dbb1151.svg?invert_in_darkmode" align=middle width=44.748825pt height=21.18732pt/> vector with a <img src="svgs/388a92a7f9b8de7a7e5ad99b56aeed0b.svg?invert_in_darkmode" align=middle width=44.748825pt height=21.18732pt/> matrix, resulting in a <img src="svgs/98179e552bb4479228248cc851cd0063.svg?invert_in_darkmode" align=middle width=36.52968pt height=21.18732pt/> vector. The matrix would look like this:
+
+<p align="center"><img src="svgs/94fd4ab5ec8d57af02434f5e70a53bb5.svg?invert_in_darkmode" align=middle width=173.9727pt height=118.357305pt/></p>
+
+This is definitely a homomorphism.
+
+#### A Small Simplification
+
 Recall:
 
 <p align="center"><img src="svgs/33570e8d856faa4ead987d0c1be4e8de.svg?invert_in_darkmode" align=middle width=154.876425pt height=18.31236pt/></p>
@@ -228,9 +236,12 @@ We will now translate the math above into the C++ code in the first section.
 ### The Short Explanation
 
 - Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127. It is not guaranteed that, from every possible chessboard state, a single coin toggle can be used to cover the full range of possible desired board states [0, 80].
-- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)], looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an <img src="svgs/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.867pt height=14.15535pt/>-dimensional hypercube, where n is the number of squares on the chessboard. There are <img src="svgs/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.867pt height=14.15535pt/> colors. We need to assign each node a color such that all colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being <img src="svgs/f8f25e4580c418a51dc556db0d8d2b93.svg?invert_in_darkmode" align=middle width=16.34523pt height=21.8394pt/>). If the number of colors is not also a power of 2, it will not divide evenly. Some colors will be represented more than others. The video has a more detailed explanation.
+- Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)] looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an <img src="svgs/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.867pt height=14.15535pt/>-dimensional hypercube, where n is the number of squares on the chessboard. There are <img src="svgs/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.867pt height=14.15535pt/> colors. We need to assign each node a color such that all <img src="svgs/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.867pt height=14.15535pt/> colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being <img src="svgs/f8f25e4580c418a51dc556db0d8d2b93.svg?invert_in_darkmode" align=middle width=16.34523pt height=21.8394pt/>). If the number of colors is not also a power of 2, it will not divide evenly. Some colors will be represented more than others. The video has a more detailed explanation.
 
 ### The Long Explanation
+
+Remember above we said that, in order to guarantee the existence of a legal move in <img src="svgs/bb2340bc819a3e831b8cbfd2391d67c6.svg?invert_in_darkmode" align=middle width=113.972925pt height=26.76201pt/>, we must guarantee <img src="svgs/71cb5ef0976705bb1329f4431a68cb9b.svg?invert_in_darkmode" align=middle width=65.188365pt height=24.6576pt/>. Or in other words, <img src="svgs/7c824f3c569b0a60602ee689772d69f3.svg?invert_in_darkmode" align=middle width=86.035455pt height=24.6576pt/>.
+
 
 ## Appendix
 
