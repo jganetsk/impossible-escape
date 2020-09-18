@@ -141,7 +141,6 @@ The meaning of $0$ vs $1$ depends on whether we are interpreting the group as ch
 
 - The group above happens to be Abelian. This means addition is commutative, or $x + y = y + x$
 - Note the standard basis $B \subset C$, consisting of vectors such as $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
-- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles).
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - Let $f$ be a group homomorphism from $f : C \rightarrow S$. In particular, we want to guarantee that $f$ is surjective, aka "onto", aka $f[C] = S$. Otherwise, we would not be able to encode all possible magic squares.
@@ -176,14 +175,14 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$, so $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$. Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles). so $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
 
 Much of what we've discussed above is mere formalism. Now we get to the core of the problem: choosing a group for $S$.
 
-The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
+The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle. This approach of just picking your favorite group does not work; the choice of group is constrained by the homomorphism $f$. 
 
 The main insight I had is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. When we apply $f$, we realize that $S$ must also be self-inverting:
 
@@ -242,16 +241,15 @@ We will now translate the math above into the C++ code in the first section.
 
 ### The Short Explanation
 
-- Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127. It is not guaranteed that, from every possible chessboard state, a single coin toggle can be used to cover the full range of possible desired board states [0, 80].
+- Imagine a 9x9 board. There will be 81 squares on it. We need 7 bits to represent the square indices, 0 to 80 inclusive. However, the full range representable by 7 bits is 0 to 127 inclusive. This means some board states encode values of 81 to 127, which do not correspond to any magic square. Prisoner #1 will have 81 options out of a space of 128, and it is not guaranteed that the option prisoner #1 needs will be present in the set.
 - Another explanation [[YouTube video](https://www.youtube.com/watch?v=wTJI_WuZSwE)] looks at the problem from the standpoint of graph coloring. Imagine a graph arranged like an $n$-dimensional hypercube, where $n$ is the number of squares on the chessboard. There are $n$ colors. We need to assign each node a color such that all $n$ colors are reachable from one of its direct neighbors. The number of nodes will always be a power of 2 (due to the number of possible chessboard states being $2^n$). If the number of colors is not also a power of 2, it will not divide evenly. Some colors will be represented more than others. The video has a more detailed explanation.
 
 ### The Long Explanation
 
-Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This requires elaboration:
-- Remember that we also required $f[C] = S$
-- To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$
-- Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well
-- Really we can only say that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, here it's merely a **subset**.
+Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This was assuming $f[C] = S$. What happens if the latter is not true?
+- Let's say that $S \subset f[C]$
+- We can still have a one-to-one mapping between $B$ and $S$ (there is still the same number of legal moves as there are magic squares). But then $f[B] \subset f[C]$
+- The jailer has control over $s_{m}$ and $c_{0}$, which implies the jalier has control over $s_{m} + f(c_{0})$. The jailer could then choose values such that $s_{m} + f(c_{0}) \notin f[B]$. And then prisoner #1 would have no legal move that could be made to put the board into state $c_{1}$ such that $f(c_{1}) = s_{m}$.
 
 So can we guarantee that $f[C] = S$? 
 
