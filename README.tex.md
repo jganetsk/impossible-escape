@@ -249,9 +249,9 @@ We will now translate the math above into the C++ code in the first section.
 
 Remember above we said that, in order to guarantee the existence of a legal move in $f^{-1}[s_{m} + f(c_{0})]$, we must guarantee $f[B] = S$. This is sufficient only if $f[C] = S$. To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$. Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well. By definition, we say that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, it's merely a **subset**.
 
-So can we guarantee that $f[C] = S$. In other words, can we guarantee that $|f[C]|$ = $|S|$?
+So can we guarantee that $f[C] = S$? In other words, can we guarantee that $|f[C]|$ = $|S|$?
 
-We can prove that $\forall f : {0, 1}^{n} -> G, f[{0, 1}^{n}] = {0, 1}^{m}, 0 \leq m \leq n$. In other words, the image of any homomorphism from a vector space over ${0, 1}$ is itself isomorphic to a vector space over ${0, 1}$ of same or reduced dimension.
+We can prove that $\forall f : \{0, 1\}^{n} \rightarrow G, f[\{0, 1\}^{n}] = \{0, 1\}^{m}, 0 \leq m \leq n$. In other words, the image of any homomorphism from a vector space over ${0, 1}$ is itself isomorphic to a vector space over ${0, 1}$ of same or reduced dimension.
 
 ## Appendix
 
