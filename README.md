@@ -67,7 +67,7 @@ uint6 ComputeXOROfHeads() {
 void ToggleCoin(uint6 square_index);
 uint6 GetMagicSquareIndex();
 
-ToggleCoin(ComputeXOROfHeads() ^ GetMagicSquareIndex());
+ToggleCoin(GetMagicSquareIndex() ^ ComputeXOROfHeads());
 ```
 
 #### Prisoner #2
@@ -134,13 +134,14 @@ We will choose to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?inver
 
 The meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> vs <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
-||<img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|<img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|
+||Meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|Meaning of <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|
+|-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
 
 - The group above happens to be Abelian. This means addition is commutative, or <img src="svgs/09db8256a22e8ce6c8ff1007bf2f00ed.svg?invert_in_darkmode" align=middle width=98.18853pt height=19.17828pt/>
-- Note the standard basis <img src="svgs/e501c3fbaf8b825ac927568e9ecd1beb.svg?invert_in_darkmode" align=middle width=48.13578pt height=22.46574pt/> is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
-- Since the field of the vector space is <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>, we can simplify the definition of "basis" by removing the scalar multiplication: <img src="svgs/ddf99885c877e14e906750895a2c952e.svg?invert_in_darkmode" align=middle width=164.387355pt height=38.79018pt/> for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
+- Note the standard basis <img src="svgs/e501c3fbaf8b825ac927568e9ecd1beb.svg?invert_in_darkmode" align=middle width=48.13578pt height=22.46574pt/>, consisting of vectors such as <img src="svgs/ab7126e4ad76a713043e3acadc024961.svg?invert_in_darkmode" align=middle width=76.69167pt height=24.6576pt/>, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
+- Since the field of the vector space is <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>, we can simplify the definition of "basis" by removing the scalar multiplication: <img src="svgs/ddf99885c877e14e906750895a2c952e.svg?invert_in_darkmode" align=middle width=164.387355pt height=38.79018pt/> for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles).
 
 - Let <img src="svgs/163af9574bd73b91a67e73d0a25c7ad6.svg?invert_in_darkmode" align=middle width=54.197055pt height=22.46574pt/> be the move that prisoner #1 will make. Therefore, <img src="svgs/06e008cdad753b62dc068ef78d610d13.svg?invert_in_darkmode" align=middle width=91.797915pt height=22.46574pt/>
 - Let <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> be a group homomorphism from <img src="svgs/87339665b58a744eea2d393d1988a61a.svg?invert_in_darkmode" align=middle width=73.03857pt height=22.83138pt/>
@@ -164,7 +165,7 @@ Therefore:
 
 <p align="center"><img src="svgs/33570e8d856faa4ead987d0c1be4e8de.svg?invert_in_darkmode" align=middle width=154.876425pt height=18.31236pt/></p>
 
-The set on the right-hand side contains all deltas that can be applied to <img src="svgs/18c0a8d8429a250dc2f045fa67126640.svg?invert_in_darkmode" align=middle width=13.666455pt height=14.15535pt/> to make <img src="svgs/ea91a6e64281baeada5eb2450dfe7641.svg?invert_in_darkmode" align=middle width=78.379125pt height=24.6576pt/>. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element <img src="svgs/4bdc8d9bcfb35e1c9bfb51fc69687dfc.svg?invert_in_darkmode" align=middle width=7.0548555pt height=22.83138pt/> in the standard basis <img src="svgs/760318998b5f14fb225b3862a8ff1901.svg?invert_in_darkmode" align=middle width=40.439355pt height=22.83138pt/>.
+The set on the right-hand side contains all deltas that can be applied to <img src="svgs/18c0a8d8429a250dc2f045fa67126640.svg?invert_in_darkmode" align=middle width=13.666455pt height=14.15535pt/> to make <img src="svgs/ea91a6e64281baeada5eb2450dfe7641.svg?invert_in_darkmode" align=middle width=78.379125pt height=24.6576pt/>. We need to guarantee that this set contains at least one legal move. 
 
 To do this, we must guarantee that each element <img src="svgs/2d8cca33f0ee74986943da285a93a659.svg?invert_in_darkmode" align=middle width=38.824005pt height=22.46574pt/> must have at least one standard basis element <img src="svgs/760318998b5f14fb225b3862a8ff1901.svg?invert_in_darkmode" align=middle width=40.439355pt height=22.83138pt/> such that <img src="svgs/60b2610f4905c8c159e74ff3539bb734.svg?invert_in_darkmode" align=middle width=59.28087pt height=24.6576pt/>. In other words <img src="svgs/71cb5ef0976705bb1329f4431a68cb9b.svg?invert_in_darkmode" align=middle width=65.188365pt height=24.6576pt/>. This is straightforward. There are 64 elements in <img src="svgs/61e84f854bc6258d4108d08d4c4a0852.svg?invert_in_darkmode" align=middle width=13.293555pt height=22.46574pt/> (there are 64 possible valid moves prisoner #1 can make) and there are 64 elements in <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets <img src="svgs/61e84f854bc6258d4108d08d4c4a0852.svg?invert_in_darkmode" align=middle width=13.293555pt height=22.46574pt/> and <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/>. 
 
@@ -184,8 +185,6 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> the additive group of integers mod 64, also known as <img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/>. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states <img src="svgs/374ff7af31c1eefcd9d7c9f484d61d43.svg?invert_in_darkmode" align=middle width=40.12965pt height=22.46574pt/>, not every square <img src="svgs/2d8cca33f0ee74986943da285a93a659.svg?invert_in_darkmode" align=middle width=38.824005pt height=22.46574pt/> is reachable with a single coin toggle.
 
-The theoretical reason for this there are no valid nontrivial homomorphisms from the group <img src="svgs/a3e5d1ccf05bfb09b34a944361a4dcfa.svg?invert_in_darkmode" align=middle width=53.287905pt height=26.76201pt/> to <img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/>, so we would not be able to construct <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>.
-
 The main insight is in realizing that <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is *self-inverting*: <img src="svgs/17b1e895acf0f8e13f0ff6ca0d49cddf.svg?invert_in_darkmode" align=middle width=126.85101pt height=22.83138pt/>. In other words, x XOR x is always zero. If we apply <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>, then we see, realize that <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must also be self-inverting:
 
 <p align="center"><img src="svgs/cc3be83ab2dbafae183ef4d508302b5b.svg?invert_in_darkmode" align=middle width=126.85101pt height=12.7854045pt/></p>
@@ -200,9 +199,9 @@ Since <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" al
 
 <p align="center"><img src="svgs/a06ed81cafc6f1f8c27d2733a9122134.svg?invert_in_darkmode" align=middle width=111.768855pt height=12.7854045pt/></p>
 
-<img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/> is not self-inverting. For example, this would require that <img src="svgs/3f85da2e02a67cb0022399fe72188984.svg?invert_in_darkmode" align=middle width=51.141585pt height=21.18732pt/>, but in that group <img src="svgs/98706f43aab06e1c6a51059f936547cc.svg?invert_in_darkmode" align=middle width=59.36073pt height=21.18732pt/>. 
+<img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/> is not self-inverting. For example, this would require that <img src="svgs/3f85da2e02a67cb0022399fe72188984.svg?invert_in_darkmode" align=middle width=51.141585pt height=21.18732pt/>, but in that group <img src="svgs/98706f43aab06e1c6a51059f936547cc.svg?invert_in_darkmode" align=middle width=59.36073pt height=21.18732pt/>. Therefore, we cannot construct a homomorphism <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> such that <img src="svgs/f8459734707b8539adaad1017520b325.svg?invert_in_darkmode" align=middle width=100.367685pt height=24.6576pt/>. It is impossible.
 
-Which group has 64 elements and is self-inverting? The group <img src="svgs/7446d816a12be7b02fbd14ddf09acf47.svg?invert_in_darkmode" align=middle width=46.73526pt height=26.76201pt/>. In other words, <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> is a 6-dimensional vector space over the field <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>, also known as the group of 6-bit bitvectors under the XOR operator.
+Which group has 64 elements and is self-inverting? The group <img src="svgs/7446d816a12be7b02fbd14ddf09acf47.svg?invert_in_darkmode" align=middle width=46.73526pt height=26.76201pt/>, or the set of 6-bit bitvectors under XOR. It turns out, <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must be "the same kind of group as" <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>, a vector space over <img src="svgs/842a3ba6459f9c7d0b7724742b431bc1.svg?invert_in_darkmode" align=middle width=40.18278pt height=24.6576pt/>.
 
 Recall:
 
@@ -213,6 +212,16 @@ Recall:
 We can make this minor simplification:
 
 <p align="center"><img src="svgs/1c4614f2381217321b581ffe3365a0a4.svg?invert_in_darkmode" align=middle width=154.876425pt height=18.31236pt/></p>
+
+### Mapping the Solution to Code
+
+We will now translate the math above into the C++ code in the first section.
+
+- Wherever we see <img src="svgs/df33724455416439909c33a7db76b2bc.svg?invert_in_darkmode" align=middle width=12.78552pt height=19.17828pt/>, we replace it with `^`, the bitwise XOR operator.
+- Wherever we see <img src="svgs/31b5b986fb2493a1e9ff48a4d00d0409.svg?invert_in_darkmode" align=middle width=62.732505pt height=24.6576pt/> where <img src="svgs/3e18a4a28fdee1744e5e3f79d13b9ff6.svg?invert_in_darkmode" align=middle width=7.113876pt height=14.15535pt/> is the current board state, replace it with `ComputeXOROfHeads()`.
+- Wherever we see <img src="svgs/e362928854defc86f84307c22a81cf37.svg?invert_in_darkmode" align=middle width=63.04221pt height=24.6576pt/>, we replace it with `i`, a `uint6` representing the 6-bit encoding of the square on the chessboard.
+- The implementation of `ComputeXOROfHeads` corresponds to <p align="center"><img src="svgs/3c93abebd3b56d1fbd29ce4f417a8734.svg?invert_in_darkmode" align=middle width=113.24874pt height=36.65541pt/></p>
+- `GetMagicSquareIndex() ^ ComputeXOROfHeads()` corresponds to <img src="svgs/9faed75638c2be7d18cffbd1ce43a9af.svg?invert_in_darkmode" align=middle width=77.374605pt height=24.6576pt/>
 
 ## Appendix
 

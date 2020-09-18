@@ -67,7 +67,7 @@ uint6 ComputeXOROfHeads() {
 void ToggleCoin(uint6 square_index);
 uint6 GetMagicSquareIndex();
 
-ToggleCoin(ComputeXOROfHeads() ^ GetMagicSquareIndex());
+ToggleCoin(GetMagicSquareIndex() ^ ComputeXOROfHeads());
 ```
 
 #### Prisoner #2
@@ -134,13 +134,14 @@ $$1 + 1 = 0$$
 
 The meaning of $0$ vs $1$ depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
-||$0$|$1$|
+||Meaning of $0$|Meaning of $1$|
+|-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
 
 - The group above happens to be Abelian. This means addition is commutative, or $x + y = y + x$
-- Note the standard basis $B \subset C$ is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
-- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at with a series of valid moves (aka single coin toggles).
+- Note the standard basis $B \subset C$, consisting of vectors such as $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
+- Since the field of the vector space is $\{0, 1\}$, we can simplify the definition of "basis" by removing the scalar multiplication: $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles).
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - Let $f$ be a group homomorphism from $f : C \rightarrow S$
@@ -164,7 +165,7 @@ Therefore:
 
 $$\Delta c \in f^{-1}[s_{m} - f(c_{0})]$$
 
-The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s_{m}$. We need to guarantee that this set contains at least one legal move. In other words, it should contain at least one element $b$ in the standard basis $b \in B$.
+The set on the right-hand side contains all deltas that can be applied to $c_{0}$ to make $f(c_{1}) = s_{m}$. We need to guarantee that this set contains at least one legal move. 
 
 To do this, we must guarantee that each element $s \in S$ must have at least one standard basis element $b \in B$ such that $f(b) = s$. In other words $f[B] = S$. This is straightforward. There are 64 elements in $B$ (there are 64 possible valid moves prisoner #1 can make) and there are 64 elements in $S$ (there are 64 squares on the chessboard). This is made even easier by the fact that every standard basis element toggles exactly one coin, so it has already "picked a square". We can then construct a straightforward one-to-one mapping between the two sets $B$ and $S$. 
 
@@ -184,8 +185,6 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
 
-The theoretical reason for this there are no valid nontrivial homomorphisms from the group $\{0, 1\}^{64}$ to $\mathbb{Z}/64\mathbb{Z}$, so we would not be able to construct $f$.
-
 The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. If we apply $f$, then we see, realize that $S$ must also be self-inverting:
 
 $$\forall c \in C: c + c = e$$
@@ -200,9 +199,9 @@ $$\forall s \in S: s + s = e$$
 
 $$\forall s \in S: s = -s$$
 
-$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. 
+$\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require that $-2 = 2$, but in that group $-2 = 62$. Therefore, we cannot construct a homomorphism $f$ such that $f[C] = \mathbb{Z}/64\mathbb{Z}$. It is impossible.
 
-Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$. In other words, $S$ is a 6-dimensional vector space over the field $\{0, 1\}$, also known as the group of 6-bit bitvectors under the XOR operator.
+Which group has 64 elements and is self-inverting? The group $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be "the same kind of group as" $C$, a vector space over $\{0, 1\}$.
 
 Recall:
 
@@ -213,6 +212,16 @@ $$\forall s \in S: s = -s$$
 We can make this minor simplification:
 
 $$\Delta c \in f^{-1}[s_{m} + f(c_{0})]$$
+
+### Mapping the Solution to Code
+
+We will now translate the math above into the C++ code in the first section.
+
+- Wherever we see $+$, we replace it with `^`, the bitwise XOR operator.
+- Wherever we see $f(c \in C)$ where $c$ is the current board state, replace it with `ComputeXOROfHeads()`.
+- Wherever we see $f(b \in B)$, we replace it with `i`, a `uint6` representing the 6-bit encoding of the square on the chessboard.
+- The implementation of `ComputeXOROfHeads` corresponds to $$f(c) = \displaystyle\sum_{i} f(b_{i})$$
+- `GetMagicSquareIndex() ^ ComputeXOROfHeads()` corresponds to $s_{m} + f(c_{0})$
 
 ## Appendix
 
