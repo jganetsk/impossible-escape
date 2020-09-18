@@ -185,7 +185,7 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle.
 
-The main insight is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. When we apply $f$, we see realize that $S$ must also be self-inverting:
+The main insight I had is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. When we apply $f$, we realize that $S$ must also be self-inverting:
 
 $$\forall c \in C: c + c = e$$
 
@@ -203,7 +203,7 @@ $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require
 
 Which group has 64 elements and is self-inverting? The vector space $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$.
 
-You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ vector with a $64 \times 6$ matrix, resulting in a $1 \times 6$ vector. The matrix would look like this:
+You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ input vector with a $64 \times 6$ constant matrix, resulting in a $1 \times 6$ output vector. The matrix would look like this:
 
 $$\begin{pmatrix}
 0 & 0 & 0 & 0 & 0 & 0 & 0 & \dots & 1\\
@@ -251,16 +251,25 @@ Remember above we said that, in order to guarantee the existence of a legal move
 - Remember that we also required $f[C] = S$
 - To be more rigorous, we could say that we should guarantee that $f[B] = f[C]$
 - Note that $f(c_{0})$ is really in the group $f[C]$, and therefore $s_{m} + f(c_{0})$ is in that group as well
-- By definition, we know that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, here it's merely a **subset**.
+- Really we can only say that $S \subseteq f[C]$. But $S$ is not even necessarily a **subgroup**, here it's merely a **subset**.
 
 So can we guarantee that $f[C] = S$? 
 
-The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Isomorphism_theorems#Theorem_A)
+The answer is yes, if and only if $|S|$ is a power of 2. Because of the [fundamental homomorphism theorem](https://en.wikipedia.org/wiki/Isomorphism_theorems#Theorem_A):
 
 > Fundamental Homomorphism Theorem:
 >
-> Let $G$ and $H$ be groups, and let $f : G \rightarrow H$ be a homomorphism. Then the image of $f$ is isomorphic to the quotient group $G / ker(f)$.
+> Let $G$ and $H$ be groups, and let $f : G \rightarrow H$ be a homomorphism.
+> 1. The [kernel](https://en.wikipedia.org/wiki/Kernel_(algebra)) of $f$ is a normal subgroup of $G$
+> 2. The image of $f$ is a subgroup of $H$
+> 3. The image of $f$ is isomorphic to the quotient group $G / ker(f)$
 
+Now we are getting into more advanced territory. Without explaining all the derivations, we are going to quickly compose a bunch of theorems to prove that the order of the image of the homomorphism is a power of 2. If you are interested, please do some independent research! The details behind these theorems are fairly accessible!
+
+- We need to know the definition of "(normal subgroups)[https://en.wikipedia.org/wiki/Normal_subgroup]". But every subgroup of an Abelian group is normal, and $C$ is Abelian, so we can nip that complexity in the bud.
+- [LaGrange's theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory) states that for any finite group $G$, the order of every subgroup $H$ of $G$ evenly divides the order of $G$. Since the order of $G$ here is $2^{n}$, then every subgroup (and hence every possible kernel) has order $2^{m}$ where $0 \leq m \leq n$.
+
+At this point, if we know how many elements are in the [quotient group](https://en.wikipedia.org/wiki/Quotient_group) $G / ker(f)$, then we know how many elements are in the image of $f$. And yes, it is as simple as $|G| / |ker(f)|$, which is $2^{n-m}, 0 \leq n-m \leq n$.
 
 ## Appendix
 
