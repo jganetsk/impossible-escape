@@ -177,7 +177,7 @@ There are two main questions that remain:
 
 And the answers:
 
-1. Each element $c \in C$ can be expressed as a sum of basis elements $b_{i} \in B$. $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for some subset of basis elements (in particular, the squares with a heads-up coin). The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles) $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
+1. Each element $c \in C$ can be expressed as a sum of basis elements, $\forall c \in C : c = \displaystyle\sum_{i} b_{i} \in B$ for the basis elements corresponding to the squares with a heads-up coin. The intuition captured here is that every chessboard state can be arrived at by starting with an all-tails board and proceeding with a series of valid moves (aka single coin toggles) $$c = \displaystyle\sum_{i} b_{i}$$ $$f(c) = f(\displaystyle\sum_{i} b_{i})$$ $$f(c) = \displaystyle\sum_{i} f(b_{i})$$ And we already have definitions of $f(b)$ for all $b \in B$, so we are done here.
 1. Now comes the interesting part. What do use as a group for $S$?
 
 #### Choosing a group for $S$
