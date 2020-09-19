@@ -135,13 +135,14 @@ We will choose to make <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?inver
 The meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> vs <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/> depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
 |Interpretation of <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>|Meaning of <img src="svgs/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|Meaning of <img src="svgs/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode" align=middle width=8.219277pt height=21.18732pt/>|
-|-|-|-|-|
+|-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
 
-- The identity element of the group, <img src="svgs/8cd34385ed61aca950a6b06d09fb50ac.svg?invert_in_darkmode" align=middle width=7.6542015pt height=14.15535pt/>, is the 0 vector: <img src="svgs/c419bd5954fff7c0ce2ce38938a8d3e8.svg?invert_in_darkmode" align=middle width=76.69167pt height=24.6576pt/> 
-- The group above happens to be Abelian. This means addition is commutative, or <img src="svgs/09db8256a22e8ce6c8ff1007bf2f00ed.svg?invert_in_darkmode" align=middle width=98.18853pt height=19.17828pt/>
 - Note the standard basis <img src="svgs/e501c3fbaf8b825ac927568e9ecd1beb.svg?invert_in_darkmode" align=middle width=48.13578pt height=22.46574pt/>, consisting of vectors such as <img src="svgs/ab7126e4ad76a713043e3acadc024961.svg?invert_in_darkmode" align=middle width=76.69167pt height=24.6576pt/>, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
+- The identity element of <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/>, known as <img src="svgs/8cd34385ed61aca950a6b06d09fb50ac.svg?invert_in_darkmode" align=middle width=7.6542015pt height=14.15535pt/>, is the 0 vector: <img src="svgs/c419bd5954fff7c0ce2ce38938a8d3e8.svg?invert_in_darkmode" align=middle width=76.69167pt height=24.6576pt/> 
+- The inverse of every element if the group is itself, <img src="svgs/8a83483ac8e846172fde3049ef0e5edd.svg?invert_in_darkmode" align=middle width=111.89112pt height=22.83138pt/>. Or, x XOR x is always 0. The intuition captured here is that toggling the same coin twice results in an unchanged board.
+- <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> happens to be Abelian. In other words, addition is commutative, or <img src="svgs/09db8256a22e8ce6c8ff1007bf2f00ed.svg?invert_in_darkmode" align=middle width=98.18853pt height=19.17828pt/>
 
 - Let <img src="svgs/163af9574bd73b91a67e73d0a25c7ad6.svg?invert_in_darkmode" align=middle width=54.197055pt height=22.46574pt/> be the move that prisoner #1 will make. Therefore, <img src="svgs/06e008cdad753b62dc068ef78d610d13.svg?invert_in_darkmode" align=middle width=91.797915pt height=22.46574pt/>
 - Let <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> be a group homomorphism from <img src="svgs/87339665b58a744eea2d393d1988a61a.svg?invert_in_darkmode" align=middle width=73.03857pt height=22.83138pt/>. In particular, we want to guarantee that <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/> is surjective, aka "onto", aka <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>. Otherwise, we would not be able to encode all possible magic squares.
@@ -185,17 +186,15 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> the additive group of integers mod 64, also known as <img src="svgs/0d9ce7c28dd16a4a3368542c3ca86a10.svg?invert_in_darkmode" align=middle width=46.57554pt height=24.6576pt/>. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states <img src="svgs/374ff7af31c1eefcd9d7c9f484d61d43.svg?invert_in_darkmode" align=middle width=40.12965pt height=22.46574pt/>, not every square <img src="svgs/2d8cca33f0ee74986943da285a93a659.svg?invert_in_darkmode" align=middle width=38.824005pt height=22.46574pt/> is reachable with a single coin toggle. This approach of just picking your favorite group does not work; the choice of group is constrained by the homomorphism <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>. 
 
-The main insight I had is in realizing that <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is *self-inverting*: <img src="svgs/17b1e895acf0f8e13f0ff6ca0d49cddf.svg?invert_in_darkmode" align=middle width=126.85101pt height=22.83138pt/>. In other words, x XOR x is always zero. The intuition captured here is that toggling the same coin twice results in an unchanged board. When we apply <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>, we realize that <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must also be self-inverting:
+The main clue is that every element in <img src="svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92478pt height=22.46574pt/> is its own inverse: <img src="svgs/8a83483ac8e846172fde3049ef0e5edd.svg?invert_in_darkmode" align=middle width=111.89112pt height=22.83138pt/>. When we apply <img src="svgs/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.8175pt height=22.83138pt/>, we realize that <img src="svgs/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027445pt height=22.46574pt/> must also be self-inverting:
 
-<p align="center"><img src="svgs/cc3be83ab2dbafae183ef4d508302b5b.svg?invert_in_darkmode" align=middle width=126.85101pt height=12.7854045pt/></p>
+<p align="center"><img src="svgs/410101d59727df6323927bbb949905b1.svg?invert_in_darkmode" align=middle width=111.89112pt height=12.7854045pt/></p>
 
-<p align="center"><img src="svgs/a3badf8efdfa5afe3063a231fe2ff9ae.svg?invert_in_darkmode" align=middle width=172.05705pt height=16.438356pt/></p>
+<p align="center"><img src="svgs/283f24512ca786bdf79ba5cb571397bb.svg?invert_in_darkmode" align=middle width=157.09683pt height=16.438356pt/></p>
 
-<p align="center"><img src="svgs/a216f6a14527bc196bee9cb1f1dff1c6.svg?invert_in_darkmode" align=middle width=172.05705pt height=16.438356pt/></p>
+<p align="center"><img src="svgs/3f253cb53e75126f0b69051cee8e396d.svg?invert_in_darkmode" align=middle width=157.09683pt height=16.438356pt/></p>
 
 Since <img src="svgs/66c55ed40bd1f9f82c48c22b5665e5b4.svg?invert_in_darkmode" align=middle width=64.81959pt height=24.6576pt/>:
-
-<p align="center"><img src="svgs/86ce8846af16bf5f531b68504cd11a1e.svg?invert_in_darkmode" align=middle width=126.728745pt height=12.7854045pt/></p>
 
 <p align="center"><img src="svgs/a06ed81cafc6f1f8c27d2733a9122134.svg?invert_in_darkmode" align=middle width=111.768855pt height=12.7854045pt/></p>
 

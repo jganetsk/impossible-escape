@@ -135,13 +135,14 @@ $$1 + 1 = 0$$
 The meaning of $0$ vs $1$ depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
 |Interpretation of $C$|Meaning of $0$|Meaning of $1$|
-|-|-|-|-|
+|-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
 
-- The identity element of the group, $e$, is the 0 vector: $\left(\begin{smallmatrix}0 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ 
-- The group above happens to be Abelian. This means addition is commutative, or $x + y = y + x$
 - Note the standard basis $B \subset C$, consisting of vectors such as $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
+- The identity element of $C$, known as $e$, is the 0 vector: $\left(\begin{smallmatrix}0 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ 
+- The inverse of every element if the group is itself, $\forall c \in C: c = -c$. Or, x XOR x is always 0. The intuition captured here is that toggling the same coin twice results in an unchanged board.
+- $C$ happens to be Abelian. In other words, addition is commutative, or $x + y = y + x$
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
 - Let $f$ be a group homomorphism from $f : C \rightarrow S$. In particular, we want to guarantee that $f$ is surjective, aka "onto", aka $f[C] = S$. Otherwise, we would not be able to encode all possible magic squares.
@@ -185,17 +186,15 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle. This approach of just picking your favorite group does not work; the choice of group is constrained by the homomorphism $f$. 
 
-The main insight I had is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. The intuition captured here is that toggling the same coin twice results in an unchanged board. When we apply $f$, we realize that $S$ must also be self-inverting:
+The main clue is that every element in $C$ is its own inverse: $\forall c \in C: c = -c$. When we apply $f$, we realize that $S$ must also be self-inverting:
 
-$$\forall c \in C: c + c = e$$
+$$\forall c \in C: c = -c$$
 
-$$\forall c \in C: f(c + c) = f(e)$$
+$$\forall c \in C: f(c) = f(-c)$$
 
-$$\forall c \in C: f(c) + f(c) = e$$
+$$\forall c \in C: f(c) = -f(c)$$
 
 Since $f[C] = S$:
-
-$$\forall s \in S: s + s = e$$
 
 $$\forall s \in S: s = -s$$
 
