@@ -141,7 +141,7 @@ The meaning of $0$ vs $1$ depends on whether we are interpreting the group as ch
 
 - Note the standard basis $B \subset C$, consisting of vectors such as $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
 - The identity element of $C$, known as $e$, is the 0 vector: $\left(\begin{smallmatrix}0 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ 
-- The inverse of every element if the group is itself, $\forall c \in C: c = -c$. Or, x XOR x is always 0. The intuition captured here is that toggling the same coin twice results in an unchanged board.
+- The inverse of every element in the group is itself, $\forall c \in C: c = -c$. Or, x XOR x is always 0. The intuition captured here is that toggling the same coin twice results in an unchanged board.
 - $C$ happens to be Abelian. In other words, addition is commutative, or $x + y = y + x$
 
 - Let $\Delta c \in B$ be the move that prisoner #1 will make. Therefore, $c_{1} = c_{0} + \Delta c$
