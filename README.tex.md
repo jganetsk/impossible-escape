@@ -135,10 +135,11 @@ $$1 + 1 = 0$$
 The meaning of $0$ vs $1$ depends on whether we are interpreting the group as chessboard states or chessboard state deltas:
 
 |Interpretation of $C$|Meaning of $0$|Meaning of $1$|
-|-|-|-|
+|-|-|-|-|
 |Chessboard states|Tails|Heads|
 |Chessboard state deltas|Do not toggle the coin|Toggle the coin|
 
+- The identity element of the group, $e$, is the 0 vector: $\left(\begin{smallmatrix}0 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$ 
 - The group above happens to be Abelian. This means addition is commutative, or $x + y = y + x$
 - Note the standard basis $B \subset C$, consisting of vectors such as $\left(\begin{smallmatrix}1 & 0 & 0 & \dots & 0 \end{smallmatrix}\right)$, is the set of valid moves that prisoner #1 can make, since each standard basis element is a delta that toggles exactly one coin.
 
@@ -184,7 +185,7 @@ Much of what we've discussed above is mere formalism. Now we get to the core of 
 
 The first intuition many seem to have when trying to solve this problem is to make $S$ the additive group of integers mod 64, also known as $\mathbb{Z}/64\mathbb{Z}$. This is often chosen because it is a simple, well-known group. It seems promising at first, but you quickly run into problems when you discover that for almost all chessboard states $c \in C$, not every square $s \in S$ is reachable with a single coin toggle. This approach of just picking your favorite group does not work; the choice of group is constrained by the homomorphism $f$. 
 
-The main insight I had is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. When we apply $f$, we realize that $S$ must also be self-inverting:
+The main insight I had is in realizing that $C$ is *self-inverting*: $\forall c \in C: c + c = e$. In other words, x XOR x is always zero. The intuition captured here is that toggling the same coin twice results in an unchanged board. When we apply $f$, we realize that $S$ must also be self-inverting:
 
 $$\forall c \in C: c + c = e$$
 
