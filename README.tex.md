@@ -202,7 +202,7 @@ $\mathbb{Z}/64\mathbb{Z}$ is not self-inverting. For example, this would require
 
 Which group has 64 elements and is self-inverting? The vector space $\{0, 1\}^{6}$, or the set of 6-bit bitvectors under XOR. It turns out, $S$ must be the "same kind of group" as $C$, also a vector space over $\{0, 1\}$. We go into more detail about this below.
 
-You may not yet be convinced that $f$ is a homomorphism. At this point, we can actually represent $f$ as matrix multiplication of a $1 \times 64$ input vector with a $64 \times 6$ constant matrix, resulting in a $1 \times 6$ output vector. The matrix would look like this:
+You may not yet be convinced that $f$ is a homomorphism. We can represent $f$ as $f(c) = Mc$ where $M$ is a constant $6 \times 64$ matrix, $c$ is a $64 \times 1$ vector, and $f(c)$ is a $6 \times 1$ vector. $M$ looks like this: 
 
 $$\begin{pmatrix}
 0 & 0 & 0 & 0 & 0 & 0 & 0 & \dots & 1\\
@@ -213,7 +213,7 @@ $$\begin{pmatrix}
 0 & 1 & 0 & 1 & 0 & 1 & 0 & \dots & 1\\
 \end{pmatrix}$$
 
-Matrix multiplication is a group homomorphism.
+Matrix multiplication is form of group homomorphism.
 
 #### A Small Simplification
 
