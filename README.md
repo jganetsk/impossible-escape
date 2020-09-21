@@ -206,7 +206,7 @@ You may not yet be convinced that <img src="svgs/190083ef7a1625fbc75f243cffb9c96
 
 <p align="center"><img src="svgs/38ea13ee7b483d20c1941d7116fab965.svg?invert_in_darkmode" align=middle width=247.9455pt height=118.357305pt/></p>
 
-Matrix multiplication is form of group homomorphism.
+Matrix multiplication is a form of group homomorphism.
 
 #### A Small Simplification
 

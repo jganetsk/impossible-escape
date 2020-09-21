@@ -213,7 +213,7 @@ $$\begin{pmatrix}
 0 & 1 & 0 & 1 & 0 & 1 & 0 & \dots & 1\\
 \end{pmatrix}$$
 
-Matrix multiplication is form of group homomorphism.
+Matrix multiplication is a form of group homomorphism.
 
 #### A Small Simplification
 
